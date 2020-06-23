@@ -1,0 +1,15 @@
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+
+namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
+    public interface IDayBalanceService : IServiceBase<DayBalance> { 
+        decimal DayAmount(int companyId);
+
+        /// <summary>
+        /// Recupera o saldo do dia para uma empresa e uma determinada fila.
+        /// </summary>
+        /// <param name="companyId">Id da empresa.</param>
+        /// <param name="queueId">Id da fila.</param>
+        /// <returns></returns>
+        DayBalance GetDayBalanceById(int companyId, int queueId);
+    }
+}

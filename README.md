@@ -1,5 +1,5 @@
 # WebBarberShopApi - Portuguese
-Esse projeto terá como intuito auxiliar barbearias com relação ao atendimento. Além da possbilidade de agendamentos, a aplicação fará controle de fila de espera que será consumida por app para, incialmente, Android, utilizando Java no Android Studio.
+Esse projeto terá como intuito auxiliar barbearias com relação ao atendimento. Além da possbilidade de agendamentos, a aplicação fará controle de fila de espera que será consumida por app para, incialmente, Android, utilizando Ionic que irei desenvolver em seguida.
 
 A ideia básica dessa aplicação é evitar que os clientes de barbearia, que trabalham com ordem de chegada, sejam obrigados a esperar o barbeiro cortar o cabelo de todos que estão na sua frente obrigatoriamente na barbearia. O app possibilitará que o cliente possa sair da barbearia e ao mesmo tempo possa acompanhar a fila em tempo real com uma estimativa de quando é a sua vez e assim retornar à barbearia.
 
@@ -14,13 +14,13 @@ A ideia básica dessa aplicação é evitar que os clientes de barbearia, que tr
 
 # Recursos utilizados: 
 
-* .NetCore 3.1 com c#; 
+* .NetCore 2.2 com c#; 
 *  SqlServer; 
 *  Swagger; 
 *  Identity; *
 *  Migration; 
 *  XUnit; 
-*  Java (AndroidStudio - For Mobile ); 
+*  Xamarin; 
 *  EntityFrameWork Core 
 * Trello ( Para gerenciamento das tarefas )
 
@@ -39,7 +39,7 @@ A ideia básica dessa aplicação é evitar que os clientes de barbearia, que tr
 
 # WebBarberShopApi - English
 
-This project will have the purpose of assisting barbershops with regard to attendance. In addition to the possibility of scheduling, the application will control the queue that will be consumed by the app for, initially, Android using Java in Android Studio.
+This project will have the purpose of assisting barbershops with regard to attendance. In addition to the possibility of scheduling, the application will control the queue that will be consumed by the app for, initially, Android using Ionic that i'll develop.
 
 The basic idea of this application is to avoid that the barbershop clients, who work with order of arrival, are forced to wait for the barber to cut the hair of all who are in front of him in the barbershop. The app will allow the customer to leave the barbershop and at the same time can follow the queue in real time with an estimate of when it is your turn and thus return to the barbershop.
 
@@ -53,12 +53,12 @@ The basic idea of this application is to avoid that the barbershop clients, who 
 * Output and input values; - Sangria and Contribution.
 
 # Resources: - 
-*  .NetCore 3.1 com c#; 
+*  .NetCore 2.2 com c#; 
 *  SqlServer; - Swagger; 
 *  Identity; 
 *  Migration; 
 *  XUnit; 
-*  Java (AndroidStudio - For Mobile ); 
+*  Xamarin; 
 *  EntityFrameWorkCore 
 *  Trello ( For tasks manangement )
 
