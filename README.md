@@ -52,7 +52,7 @@ The basic idea of this application is to avoid that the barbershop clients, who 
 * How much he has in his pocket;
 * Output and input values; - Sangria and Contribution.
 
-# Resources: - 
+# Resources used: 
 *  .NetCore 2.2 com c#; 
 *  SqlServer; - Swagger; 
 *  Identity; 
