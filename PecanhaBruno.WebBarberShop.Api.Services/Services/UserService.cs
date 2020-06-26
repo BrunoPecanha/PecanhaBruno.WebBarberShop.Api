@@ -1,41 +1,80 @@
-﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
+using PecanhaBruno.WebBarberShop.Service.Properties;
+using System;
 
-namespace PecanhaBruno.WebBarberShop.Service.Services {
-    public class UserService : ServiceBase<User>, IUserService {
-
+namespace PecanhaBruno.WebBarberShop.Service.Services
+{
+    public class UserService : ServiceBase<User>, IUserService
+    {
         private readonly IUserRepository _repository;
+        private readonly IUserService _service;
 
-        public UserService(IUserRepository repository)
-            : base(repository) {
+        public UserService(IUserRepository repository, IUserService service)
+            : base(repository)
+        {
             _repository = repository;
+            _service = service;
         }
 
-        public void CreateNewUser(User User) {
-            _repository.Add(User);
+        public DefaultOutPutContainer CreateNewUser(User user)
+        {
+            if (_repository.IsThereAlreadyThisEmail(user.Email))
+                throw new Exception(Resources.mEmailAlreadyInUse);
 
+            _service.CreateNewUser(user);
+
+            return new DefaultOutPutContainer()
+            {
+                Id = user.Id,
+                Valid = true,
+                Message = Resources.mSucceedCreated
+            };
         }
 
-        public void DeleteUser(int id) {
-            _repository.DeleteUser(id);
-        }
+        public DefaultOutPutContainer DeleteUser(int id)
+        {
 
-        public void SoftDeleteUser(User user) {
-            _repository.SoftDeleteUser(user);
-        }
+            User user = _repository.GetById(id);
 
-        /// <summary>
-        /// Verifica se o usuário já foi atendido alguma vez.
-        /// </summary>
-        /// <param name="userId">Id do usuário.</param>
-        /// <returns></returns>
-        public bool IsThereTransactionsForThisUser(int userId) {
-            return _repository.isThereTransactionsForThisUser(userId);
-        }
+            if (user is null)
+            {
+                throw new Exception(Resources.mUserNotFound);
 
-        public bool IsThereAlreadyThisEmail(string email) {
-            return _repository.IsThereAlreadyThisEmail(email);
+            }
+            else if (user.Owner)
+            {
+                throw new Exception(Resources.mCantDeleteOwnerUser);
+            }
+
+            bool isThereTransactionsForThisUser = _repository.isThereTransactionsForThisUser(user.Id);
+
+            if (isThereTransactionsForThisUser)
+            {
+                user.UpdateActivated(false);
+                _service.Update(user);
+            }
+            else
+            {
+                _service.Remove(user);
+            }
+
+            return new DefaultOutPutContainer()
+            {
+                Valid = true,
+                Message = Resources.mSuceedDeleted
+            };
+        }       
+
+        public DefaultOutPutContainer UpdateUser(User user)
+        {
+            return new DefaultOutPutContainer()
+            {
+                Valid = true,
+                Message = Resources.mSuceedDeleted
+            };
         }
     }
 }

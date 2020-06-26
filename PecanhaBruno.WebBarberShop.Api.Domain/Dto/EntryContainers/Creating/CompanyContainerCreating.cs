@@ -1,8 +1,8 @@
-﻿using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Creating;
+﻿using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Entities;
 
-namespace Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating {
-    public class CompanyContainer {       
+namespace Pecanha.WebBarberShopp.Domain.EntryContainers.Creating {
+    public class CompanyContainerCreating {       
 
         /// <summary>
         /// Corpo da mensagem

@@ -1,5 +1,4 @@
-﻿using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
-using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using PecanhaBruno.WebBarberShop.Service.Properties;

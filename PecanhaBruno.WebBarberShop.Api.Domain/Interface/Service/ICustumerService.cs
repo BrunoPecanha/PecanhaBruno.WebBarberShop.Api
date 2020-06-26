@@ -10,6 +10,6 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
         string ElapsedTime(int customerId);
         bool CallNextCustomerInQueue(int queueId);
         IList<Custumer> GetCustomerByName(string name);
-        void SaveCustumerSelectedServices(Custumer custumer, int[] serviceList);
+        void SaveCustumerSelectedServices(int companyId, Custumer custumer, int[] serviceList);
     }
 }

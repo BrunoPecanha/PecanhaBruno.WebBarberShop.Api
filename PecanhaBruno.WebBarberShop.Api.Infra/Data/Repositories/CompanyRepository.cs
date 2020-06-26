@@ -9,7 +9,6 @@ using System.Linq;
 namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
     public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {
-
         private IWebBarberShoppContext _dbContext { get; }
 
         public CompanyRepository(IWebBarberShoppContext dbContext) {

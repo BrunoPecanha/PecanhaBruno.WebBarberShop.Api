@@ -1,7 +1,8 @@
 ﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
-    public interface IDayBalanceService : IServiceBase<DayBalance> { 
+    public interface IDayBalanceService : IServiceBase<DayBalance>
+    {
         decimal DayAmount(int companyId);
 
         /// <summary>
@@ -11,5 +12,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
         /// <param name="queueId">Id da fila.</param>
         /// <returns></returns>
         DayBalance GetDayBalanceById(int companyId, int queueId);
+        void Withdraw(int companyId, decimal value);
+        void Deposit(int companyId, decimal value);
     }
 }

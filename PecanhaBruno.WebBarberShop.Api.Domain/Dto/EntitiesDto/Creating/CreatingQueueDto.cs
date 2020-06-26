@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Creating {
+namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
+{
     public class CreatingQueueDto {       
         /// <summary>
         /// Objeto usuário que iniciará a fila.

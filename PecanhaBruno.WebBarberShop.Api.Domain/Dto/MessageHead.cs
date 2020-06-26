@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers {
+namespace PecanhaBruno.WebBarberShop.Domain.Dto {
 
     /// <summary>
     /// Cabeçalho padrão para mensagens de entrada.

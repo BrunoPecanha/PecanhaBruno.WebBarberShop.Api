@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Infra.Context;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
+namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories
+{
     public class DayBalanceRepository : RepositoryBase<DayBalance>, IDayBalanceRepository
     {
         private IWebBarberShoppContext _dbContext { get; }
@@ -32,5 +31,6 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
             return _dbContext.DayBalance
                       .FirstOrDefault(x => x.CompanyId == companyId && x.QueueId == queueId);                      
         }
+
     }
 }

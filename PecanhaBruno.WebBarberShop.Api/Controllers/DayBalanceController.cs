@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating;
-using PecanhaBruno.WebBarberShop.Application.Interface;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
+using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
 
-namespace PecanhaBruno.WebBarberShop.Api.Controllers {
+namespace PecanhaBruno.WebBarberShop.Api.Controllers
+{
     [AllowAnonymous]
     [Route("api/DayBalance")]
     public class DayBalanceController : ControllerBase
     {
-        private readonly IDayBalanceAppService _dayBalanceApp;
+        private readonly IDayBalanceService _dayBalanceService;
 
-        public DayBalanceController(IDayBalanceAppService dayBalanceApp)
+        public DayBalanceController(IDayBalanceService dayBalanceService)
         {
-            _dayBalanceApp = dayBalanceApp;
+            _dayBalanceService = dayBalanceService;
         }
 
         [Route("Withdraw/{companyId}/{value}")]
@@ -24,8 +23,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         {
             try
             {
-                var ret = _dayBalanceApp.Withdraw(companyId, value);
-                return Ok(ret);
+                _dayBalanceService.Withdraw(companyId, value);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -43,7 +42,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         {
             try
             {
-                var ret = _dayBalanceApp.Deposit(companyId, value);
+                var ret = _dayBalanceService.Deposit(companyId, value);
                 return Ok(ret);
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers
+namespace PecanhaBruno.WebBarberShop.Domain.Dto
 {
     public class DefaultOutPutContainer
     {
