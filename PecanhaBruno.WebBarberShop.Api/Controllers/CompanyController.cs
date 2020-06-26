@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Updating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
 using System;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
+using PecanhaBruno.WebBarberShop.Domain.Dto;
+using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
+using Pecanha.WebBarberShopp.Domain.EntryContainers.Updating;
 
 namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     [AllowAnonymous]
     [Route("api/Company")]
-    public class CompanyController : ControllerBase
-    {
-        private readonly ICompanyService _companyApp;
+    public class CompanyController : ControllerBase {
+        private readonly ICompanyService _service;
+        private readonly ICompanyRepository _repository;
 
-        public CompanyController(ICompanyService companyAppService) {
-            _companyApp = companyAppService;
+        public CompanyController(ICompanyService service, ICompanyRepository repository) {
+            _service = service;
+            _repository = repository;
         }
 
-        [Route("Register")]
         [HttpPost]
-        public IActionResult Post([FromBody] CompanyContainer company) {
-
+        public IActionResult Post([FromBody] CompanyContainerCreating company) {
             try {
-                _companyApp.CreateNewCompany(company.ToEntity(), company.CompanyMessage.UserId);
+                _service.CreateNewCompany(company.ToEntity());
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -32,25 +32,23 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             }
         }
 
-        [Route("GetAll")]
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAll() {
             try {
-                var ret = _companyApp.GetAll();
+                var ret = _repository.GetAll();
                 return Ok(ret);
             } catch (Exception ex) {
-                return BadRequest(new DefaultOutPutContainer() {                    
+                return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message
                 });
             }
         }
 
-        [Route("GetById")]
-        [HttpGet]
+        [HttpGet("GetById")]
         public IActionResult GetById(int id) {
             try {
-                var ret = _companyApp.GetCompanyAndUserById(id);
+                var ret = _repository.GetCompanyById(id);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -61,26 +59,24 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             }
         }
 
-        [Route("Update")]
         [HttpPut]
-        public IActionResult Put(UpdatingCompanyDto company) {
+        public IActionResult Put(CompanyContainerUpdating company) {
             try {
-                _companyApp.UpdateCompany(company.ToEntity());
-                return Ok();                
+                _service.UpdateCompany(company.ToEntity());
+                return Ok();
             } catch (Exception ex) {
-                return BadRequest(new DefaultOutPutContainer() {                  
+                return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message
                 });
             }
         }
 
-        [Route("Delete")]
         [HttpDelete]
         public IActionResult Delete(int id) {
             try {
-                _companyApp.RemoveCompany(id);
-                return Ok();               
+                _service.RemoveCompany(id);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
@@ -88,8 +84,6 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                     Message = ex.Message
                 });
             }
-        }                    
-
-
+        }
     }
 }
