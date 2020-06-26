@@ -1,31 +1,29 @@
-﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using PecanhaBruno.WebBarberShop.Service.Properties;
-using System;
-using System.Collections.Generic;
 
 namespace PecanhaBruno.WebBarberShop.Service.Services {
     public class CompanyService : ServiceBase<Company>, ICompanyService {
         private readonly ICompanyRepository _companyRepositoy;
         private readonly IUserRepository _userRepository;
-        private readonly IUserService _UserService;
 
-        public CompanyService(ICompanyRepository repository, IUserRepository userrepository, IUserService UserService)
+        public CompanyService(ICompanyRepository repository, IUserRepository userrepository)
             : base(repository) {
-            _UserService = UserService;
             _companyRepositoy = repository;
             _userRepository = userrepository;
         }
 
-        public void CreateNewCompany(Company company, int userId) {
-            User user = _userRepository.GetById(userId);
+        public void CreateNewCompany(Company company) {
+            User user = _userRepository.GetById(company.UserId);
 
             if (user is null) {
                 throw new Exception(Resources.mNoMoreCustomers);
             }
 
-            company.UpdateUser(userId);
+            company.UpdateUser(company.UserId);
             user.UpdateOwner(true);
             _companyRepositoy.Add(company);
             user.UpdateCompany(company, false);
@@ -47,16 +45,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
             companyXUser.UpdateRealName(company.RealName);
             companyXUser.UpdateWorkType(company.UseQueue);
 
-            _companyRepositoy.Update(companyXUser);           
-        }
-
-        public Company GetCompanyAndUserById(int id) {
-            var company = _companyRepositoy.GetCompanyById(id);
-
-            if (company is null) {
-                throw new Exception(string.Format(Resources.mNoCompanyWasFoundWithId, id));
-            }
-            return company;            
+            _companyRepositoy.Update(companyXUser);
         }
 
         public bool CreatingCustumerWithOutPhone(ICollection<ServiceType> serviceList, User user) {
@@ -64,7 +53,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
         }
 
         public User RegisterUserWithOutPhone(User user) {
-            if (_UserService.IsThereAlreadyThisEmail(user.Email))
+            if (_userRepository.IsThereAlreadyThisEmail(user.Email))
                 throw new Exception(Resources.mEmailAlreadyInUse);
 
             _userRepository.Add(user);

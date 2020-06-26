@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Updating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
 using System;
 
-namespace PecanhaBruno.WebBarberShop.Api.Controllers {
+namespace PecanhaBruno.WebBarberShop.Api.Controllers
+{
     /// <summary>
     /// Controler da classe Cliente
     /// </summary>

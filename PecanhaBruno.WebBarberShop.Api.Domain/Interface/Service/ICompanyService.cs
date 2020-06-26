@@ -5,13 +5,11 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
     public interface ICompanyService : IServiceBase<Company> {
         bool CompanyHasTransactions(int companyId);
 
-        Company GetCompanyAndUserById(int id);
-
         void UpdateCompany(Company company);
 
         void RemoveCompany(int id);
 
-        void CreateNewCompany(Company company, int userId);
+        void CreateNewCompany(Company company);
         /// <summary>
         /// Rotina exclusiva para o proprietário incluir usuários que não possuem celular na fila.
         /// </summary>

@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
-    public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
-    {
+    public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository {
+        private const string _companyWasnFound = "Company was not found";
+
         private IWebBarberShoppContext _dbContext { get; }
 
         public CompanyRepository(IWebBarberShoppContext dbContext) {
             _dbContext = dbContext;
-        }      
+        }
 
         public Company GetCompanyById(int id) {
             return _dbContext.Company
@@ -43,6 +44,15 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
             throw new NotImplementedException();
         }
 
+        public Company GetCompanyAndUserById(int id) {
+            var company = _dbContext.Company.FirstOrDefault(x => x.Id == id);
+
+            if (company is null) {
+                throw new Exception(string.Format(_companyWasnFound));
+            }
+            return company;
+        }
+
         /// <summary>
         /// Rotina para o usuário administrador inserir cliente no meio da fila
         /// </summary>
@@ -58,12 +68,11 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
         /// </summary>
         /// <param name="companyId"></param>
         /// <returns></returns>
-        public bool CompanyHasTransactions(int companyId)
-        {
+        public bool CompanyHasTransactions(int companyId) {
             return _dbContext.Company
                             .Include(x => x.User)
                             .ThenInclude(x => x.Custumer)
-                            .Any(x => x.Id == companyId);                            
+                            .Any(x => x.Id == companyId);
         }
     }
 }

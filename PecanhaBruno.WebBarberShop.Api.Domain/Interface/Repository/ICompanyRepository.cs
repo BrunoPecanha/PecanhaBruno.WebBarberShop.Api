@@ -2,8 +2,7 @@
 using PecanhaBruno.WebBarberShop.Domain.Entities;
 using System.Collections.Generic;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository
-{
+namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository {
     public interface ICompanyRepository : IRepositoryBase<Company> {
 
         /// <summary>
@@ -26,14 +25,6 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository
         /// <param name="userId"></param>
         /// <param name="serviceListIds"></param>
         /// <returns></returns>
-        bool InsertCustumerInQueue(int userId, IList<int> serviceListIds);
-
-        /// <summary>
-        /// Inseri o usuário ( convertido para cliente ) na fila atual
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="serviceListIds"></param>
-        /// <returns></returns>
         bool InsertCustumerInHour(int userId, IList<int> serviceListIds);
 
         /// <summary>
@@ -45,6 +36,6 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository
         /// <param name="passWord">Senha escolhida.</param>
         /// <returns></returns>
         bool RegisterUserWithOutPhone(string nome, string lastName, string login, string passWord);
-     
+
     }
 }
