@@ -36,7 +36,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         public IActionResult GetAll() {
             try {
                 var ret = _repository.GetAll();
-                return Ok(ret);
+                return Ok(new DefaultOutPutContainer() {
+                    Valid = false,
+                    Log = ret
+                });
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -49,7 +52,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         public IActionResult GetById(int id) {
             try {
                 var ret = _repository.GetCompanyById(id);
-                return Ok(ret);
+                return Ok(new DefaultOutPutContainer() {
+                    Valid = false,
+                    Log = ret
+                });
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,

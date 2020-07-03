@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
 using Pecanha.WebBarberShopp.Domain.EntryContainers.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
 
-namespace PecanhaBruno.WebBarberShop.Api.Controllers
-{
+namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     /// <summary>
     /// Classe que trata da entrada de clientes no sistema.
     /// </summary>

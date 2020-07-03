@@ -11,5 +11,8 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
         bool CallNextCustomerInQueue(int queueId);
         IList<Custumer> GetCustomerByName(string name);
         void SaveCustumerSelectedServices(int companyId, Custumer custumer, int[] serviceList);
+        void DeleteFromQueue(int customerId);
+        void UpdateCustomer(int companyId, int customerId, int[] serviceList, string comment);
+        void EndCustomerService(int customerId, int companyId);
     }
 }
