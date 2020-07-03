@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating
-{
-    public class UpdatingCustumerDto
-    {
+namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
+    public class UpdatingCustumerDto {
         /// <summary>
         /// Id do cliente
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "CustumerId")]
         public int CustumerId { get; set; }
+
+        // <summary>
+        /// Id da empresa
+        /// </summary>
+        public int CompanyId { get; set; }
 
         /// <summary>
         /// Lista de serviços escolhidos pelo usuário.
@@ -20,8 +21,6 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating
         /// <summary>
         /// Objeto usuário que será atribuído o serviço.
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Comment")]
         public string Comment { get; set; }
     }
 }

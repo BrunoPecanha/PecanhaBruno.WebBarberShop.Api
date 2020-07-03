@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
 {
@@ -30,5 +31,9 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
+
+        public ServiceType ToEntity() {
+            return new ServiceType(Name, MediumTime, Price, CompanyId);
+        }
     }
 }

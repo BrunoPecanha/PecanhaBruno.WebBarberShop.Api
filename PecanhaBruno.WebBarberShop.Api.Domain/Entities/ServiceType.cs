@@ -49,6 +49,11 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
                 this.Name = serviceName;
         }
 
+        public void Validate() {
+           // Validar se os campos estão Ok
+           // Lançar exceção senão estiverem
+        }
+
         public void UpdateMediumTime(int mediumTime) {
             if (mediumTime > 0)
                 this.MediumTime = mediumTime;

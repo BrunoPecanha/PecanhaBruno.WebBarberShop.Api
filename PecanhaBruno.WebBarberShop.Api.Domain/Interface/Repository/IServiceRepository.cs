@@ -9,5 +9,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository {
         /// <param name="ids">Identificador dos serviços.</param>
         /// <returns></returns>
         ICollection<ServiceType> GetListByIds(int[] ids);
+        ServiceType GetServiceById(int companyId, int serviceId);
+        IList<ServiceType> GetServicesByCustomer(int customerId);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
 
@@ -13,14 +15,14 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
     [Route("api/ServiceType")]
     public class ServiceTypeController : ControllerBase
     {
-        private readonly IServiceTypeService _serviceApp;
+        private readonly IServiceTypeService _service;
 
         /// <summary>
         /// Entrada da mensagem de Cliente.
         /// </summary>
         /// <param name="serviceApp"></param>
         public ServiceTypeController(IServiceTypeService serviceApp) {
-            _serviceApp = serviceApp;
+            _service = serviceApp;
         }
 
         /// <summary>
@@ -30,10 +32,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// <returns></returns>
         [Route("Register")]
         [HttpPost]
-        public IActionResult Post([FromBody] ServiceTypeContainer service) {
+        public IActionResult Post([FromBody] CreatingServiceTypeDto service) {
             try {
-                var ret = _serviceApp.CreateNewService(service.ToEntity());
-                return Ok(ret);
+                 _service.CreateNewService(service.ToEntity());
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -41,7 +43,6 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
                 });
             }
         }
-
 
         /// <summary>
         /// Recupera todas os tipos de serviços por empresa paginado.
@@ -54,7 +55,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         [HttpGet]
         public IActionResult GetAll([FromRoute] int companyId, int page, int qtd) {
             try {
-                var ret = _serviceApp.GetAllByCompany(companyId, page, qtd);
+                var ret = _service.GetAllServicesType(companyId, page, qtd);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -63,7 +64,6 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
                 });
             }
         }
-
 
         /// <summary>
         /// Recupera um serviço pelo id
@@ -74,7 +74,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         [HttpGet]
         public IActionResult GetById(int id) {
             try {
-                var ret = _serviceApp.GetById(id);
+                var ret = _service.GetById(id);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -94,8 +94,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         [HttpPut]
         public IActionResult Put(UpdatingServiceTypeDto serviceDto) {
             try {
-                var ret = _serviceApp.UpdateService(serviceDto);
-                return Ok(ret);
+                _service.UpdateService(serviceDto.ToEntity());
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -113,8 +113,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         [HttpDelete]
         public IActionResult Delete(int id) {
             try {
-                var ret = _serviceApp.TryDeleteService(id);
-                return Ok(ret);
+                _service.TryHardDelete(id);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
@@ -136,7 +136,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         {
             try
             {
-                var ret = _serviceApp.GetServicesByCustomer(customerId);
+                var ret = _service.GetServicesByCustomer(customerId);
                 return Ok(ret);
             }
             catch (Exception ex)

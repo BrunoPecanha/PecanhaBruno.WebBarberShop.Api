@@ -1,28 +1,35 @@
 ﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
+using PecanhaBruno.WebBarberShop.Infra.Context;
 using PecanhaBruno.WebBarberShop.Service.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
-namespace PecanhaBruno.WebBarberShop.Service.Services
-{
-    public class CustumerService : ServiceBase<Custumer>, ICustumerService
-    {
+namespace PecanhaBruno.WebBarberShop.Service.Services {
+    public class CustumerService : ServiceBase<Custumer>, ICustumerService {
         private readonly ICustumerRepository _customerRepositoy;
         private readonly ICustumerSelectedServicesRepository _customerSelectedServicesRepository;
         private readonly ICurrentQueueRepository _currentQueueRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IServiceTypeService _serviceTypeService;
-        public CustumerService(IUserRepository userRepository, ICustumerRepository repository, ICustumerSelectedServicesRepository customer, ICurrentQueueRepository currentQueueRepository, IServiceTypeService serviceType)
-            : base(repository)
-        {
+        private readonly IServiceTypeRepository _serviceTypeRepository;
+        private readonly IWebBarberShoppContext _dbContext;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly IDayBalanceRepository _dayBalanceRepository;
+
+        public CustumerService(IWebBarberShoppContext context, IUserRepository userRepository, ICustumerRepository repository, ICustumerSelectedServicesRepository customer,
+            ICurrentQueueRepository currentQueueRepository, IServiceTypeRepository serviceType, ICompanyRepository companyRepository, IDayBalanceRepository dayBalanceRepository)
+            : base(repository) {
             _customerRepositoy = repository;
             _customerSelectedServicesRepository = customer;
             _currentQueueRepository = currentQueueRepository;
             _userRepository = userRepository;
-            _serviceTypeService = serviceType;
+            _serviceTypeRepository = serviceType;
+            _companyRepository = companyRepository;
+            _dayBalanceRepository = dayBalanceRepository;
+            _dbContext = context;
         }
 
         /// <summary>
@@ -30,8 +37,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// </summary>
         /// <param name="customer">Objeto cliente recebido</param>
         /// <returns></returns>
-        public Custumer AddWithReturn(Custumer customer)
-        {
+        public Custumer AddWithReturn(Custumer customer) {
             _customerRepositoy.Add(customer);
             return customer;
         }
@@ -41,8 +47,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// </summary>
         /// <param name="customerId">Id do cliente.</param>
         /// <returns></returns>
-        public List<CustumerXServices> GetAllSelectedCustomerServices(int customerId)
-        {
+        public List<CustumerXServices> GetAllSelectedCustomerServices(int customerId) {
             return _customerSelectedServicesRepository.GetAllSelectedCustomerServices(customerId);
         }
 
@@ -50,12 +55,10 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// Finaliza todos os cliente da fila aberta para empresa.
         /// </summary>
         /// <param name="companyId">Id da empresa</param>
-        public void EndAllCustomerServicesInQueue(int companyId)
-        {
+        public void EndAllCustomerServicesInQueue(int companyId) {
             ICollection<Custumer> allcustomersInQueue = _currentQueueRepository.GetAllCustumersInCurrentQueue(companyId);
 
-            foreach (var customer in allcustomersInQueue)
-            {
+            foreach (var customer in allcustomersInQueue) {
                 customer.UpdateServiceStatus();
                 _customerRepositoy.Update(customer);
             }
@@ -66,17 +69,17 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// </summary>
         /// <param name="userId">Id do usuário.</param>
         /// <returns></returns>
-        public bool IsCustomerAlreadyInQueue(int userId)
-        {
+        public bool IsCustomerAlreadyInQueue(int userId) {
             return _customerRepositoy.IsCustomerAlreadyInQueue(userId);
         }
 
-        public string ElapsedTime(int customerId)
-        {
+        public string ElapsedTime(int customerId) {
             Custumer customer = _customerRepositoy.GetById(customerId);
 
-            if (customer is null)
-                return null;
+
+            if (customer is null) {
+                throw new Exception(Resources.mCustomerNotFound);
+            }
 
             TimeSpan diff = DateTime.Now - customer.RegisteringDate;
             return string.Format(
@@ -91,9 +94,11 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// <summary>
         /// Chama o próximo da fila
         /// </summary>
-        public bool CallNextCustomerInQueue(int queueId)
-        {
-            var newCurrentCustomer = _customerRepositoy.CallNextCustomerInQueue(queueId);
+        public bool CallNextCustomerInQueue(int queueId) {
+            var newCurrentCustomer = _dbContext.Custumer
+                             .OrderBy(x => x.QueuePosition)
+                             .FirstOrDefault(x => x.QueueId == queueId && !x.IsServiceDone);
+
             if (newCurrentCustomer is null)
                 return false;
             newCurrentCustomer.CurrentCustomerInService = true;
@@ -102,13 +107,30 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         }
 
         /// <summary>
-        /// Recupera o cliente pelo nome
+        /// Recupera os clientes que batem com a string passada.
         /// </summary>
         /// <param name="name">Nome do cliente.</param>
         /// <returns>Retorna a lista com os cliente que batem com a descrição.</returns>
-        public IList<Custumer> GetCustomerByName(string name)
-        {
+        public IList<Custumer> GetCustomerByName(string name) {
             return _customerRepositoy.GetCustomerByName(name);
+        }
+
+
+        /// <summary>
+        /// Exclui o cliente da fila.
+        /// </summary>
+        /// <param name="customerId">Identificação do cliente.</param>
+        /// <returns></returns>
+        public void DeleteFromQueue(int customerId) {
+            List<CustumerXServices> custumerXServicesBd = _customerSelectedServicesRepository.GetAllSelectedCustomerServices(customerId);
+            Custumer custumer = custumerXServicesBd.Select(x => x.Custumer).First();
+
+            if (custumer.IsServiceDone) {
+                throw new Exception(Resources.mUsersServicesAlreadyDone);
+            }
+
+            custumerXServicesBd.ForEach(x => _customerSelectedServicesRepository.Remove(x));
+            _dbContext.Custumer.Remove(custumer);
         }
 
         /// <summary>
@@ -117,8 +139,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
         /// <param name="companyId">Id da empresa</param>
         /// <param name="custumer">Cliente que será inserido na fila</param>
         /// <param name="serviceList">Lista de serviços do cliente.</param>
-        public void SaveCustumerSelectedServices(int companyId, Custumer custumer, int[] serviceList)
-        {
+        public void SaveCustumerSelectedServices(int companyId, Custumer custumer, int[] serviceList) {
             bool isThereQueStarted = _currentQueueRepository.IsThereQueueStarted(companyId);
             bool isCustomerAlreadyInQueue = this.IsCustomerAlreadyInQueue(custumer.Id);
 
@@ -131,12 +152,9 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
             User user = _userRepository.GetById(custumer.UserId);
             CurrentQueue currentQueue = _currentQueueRepository.GetCurrentQueue(companyId);
 
-            if (user is null)
-            {
+            if (user is null) {
                 throw new Exception(string.Format(Resources.mNoUserWasFoundWithId, custumer.UserId));
-            }
-            else if (currentQueue is null)
-            {
+            } else if (currentQueue is null) {
                 throw new Exception(string.Format(Resources.mNoQueueWasFound));
             }
 
@@ -145,13 +163,56 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
 
             _customerRepositoy.Add(customer);
 
-            foreach (int serviceId in serviceList)
-            {
-                ServiceType service = _serviceTypeService.GetServiceById(companyId, serviceId);
+            foreach (int serviceId in serviceList) {
+                ServiceType service = _serviceTypeRepository.GetServiceById(companyId, serviceId);
 
-                if (service != null)
-                {
+                if (service != null) {
                     _customerSelectedServicesRepository.Add(new CustumerXServices(service, customer));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Finaliza o serviço de um cliente
+        /// </summary>
+        /// <param name="customerId">Id da empresa.</param>
+        /// <returns></returns>
+        public void EndCustomerService(int customerId, int companyId) {
+            Custumer customer = _customerRepositoy.GetById(customerId);
+            Company company = _companyRepository.GetById(companyId);
+
+            if (customer is null)
+                throw new Exception(Resources.mCustomerNotFound);
+            else if (company is null)
+                throw new Exception(Resources.mCompanyNotFound);
+            else if (customer.IsServiceDone)
+                throw new Exception(Resources.mUsersServicesAlreadyDone);
+            else if (!customer.CurrentCustomerInService)
+                throw new Exception(Resources.mCustomerIsNotInService);
+
+            User usuario = _userRepository.GetById(customer.UserId);
+
+            customer.UpdateServiceStatus();
+            usuario.UpdateLastVisitDate();
+            _customerRepositoy.Update(customer);
+            _userRepository.Update(usuario);
+
+            decimal totalServices = _serviceTypeRepository.GetServicesByCustomer(customerId).Sum(x => x.Price);
+            DayBalance dayBalance = _dayBalanceRepository.GetDayBalanceById(companyId, customer.QueueId ?? 0);
+
+            dayBalance.Deposit(totalServices);
+            _dayBalanceRepository.Update(dayBalance);
+        }
+
+        public void UpdateCustomer(int companyId, int customerId, int[] serviceList, string comment) {
+            Custumer customer = _customerRepositoy.GetById(customerId);
+
+            customer.CustumerServices.Clear();
+            foreach (int serviceId in serviceList) {
+                ServiceType service = _serviceTypeRepository.GetServiceById(companyId, serviceId);
+
+                if (service != null) {
+                    customer.AddServiceToCustumer(new CustumerXServices(service, customer));
                 }
             }
         }

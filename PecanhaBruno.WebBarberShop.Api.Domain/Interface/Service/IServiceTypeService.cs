@@ -9,6 +9,5 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
         void CreateNewService(ServiceType serviceDto);
         ServiceType GetServiceById(int companyId, int id);
         ICollection<ServiceType> GetServicesByCustomer(int userId);
-        ICollection<ServiceType> GetListByIds(int[] ids);
     }
 }

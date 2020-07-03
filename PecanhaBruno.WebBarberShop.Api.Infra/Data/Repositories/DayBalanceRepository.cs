@@ -31,6 +31,5 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories
             return _dbContext.DayBalance
                       .FirstOrDefault(x => x.CompanyId == companyId && x.QueueId == queueId);                      
         }
-
     }
 }

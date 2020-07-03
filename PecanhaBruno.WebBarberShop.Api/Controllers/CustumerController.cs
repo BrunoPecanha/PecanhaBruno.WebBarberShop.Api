@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Updating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers.Creating;
+using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
 
@@ -14,26 +13,24 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     [AllowAnonymous]
     [Route("api/Custumer")]
     public class CustumerController : ControllerBase {
-        private readonly ICustumerService _custumerApp;
+        private readonly ICustumerService _service;
 
         /// <summary>
         /// Entrada da mensagem de Cliente.
         /// </summary>
         /// <param name="companyService"></param>
         public CustumerController(ICustumerService companyService) {
-            _custumerApp = companyService;
+            _service = companyService;
         }
 
         /// <summary>
         /// Método para criar um novo cliente.
         /// </summary>
         /// <param name="custumer">Usuário que será transformado em cliente.</param>
-
-        [Route("Register")]
         [HttpPost]
-        public IActionResult Post([FromBody] CustumerContainer custumer) {
+        public IActionResult Post([FromBody] CustumerContainerCreating custumer) {
             try {
-                _custumerApp.SaveCustumerSelectedServices(custumer.ToEntity(), custumer.CustumerMessage.ServiceList);             
+                _service.SaveCustumerSelectedServices(custumer.CustumerMessage.CompanyId, custumer.ToEntity(), custumer.CustumerMessage.ServiceList);
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -41,13 +38,13 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                     Message = ex.Message
                 });
             }
-        }        
+        }
 
         [Route("GetById")]
         [HttpGet]
         public IActionResult GetById(int id) {
             try {
-                var ret = _custumerApp.GetById(id);
+                var ret = _service.GetById(id);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -61,7 +58,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpGet]
         public IActionResult GetCostumerByName([FromRoute] string name) {
             try {
-                var ret = _custumerApp.GetCostumerByName(name);
+                var ret = _service.GetCustomerByName(name);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -80,8 +77,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpDelete]
         public IActionResult Delete(int id) {
             try {
-                var ret = _custumerApp.DeleteFromQueue(id);
-                return Ok(ret);
+                 _service.DeleteFromQueue(id);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -99,8 +96,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut]
         public IActionResult Put([FromBody] UpdatingCustumerDto customer) {
             try {
-                var ret = _custumerApp.UpdaSelectedServices(customer);
-                return Ok(ret);
+                 _service.UpdateCustomer(customer.CompanyId, customer.CustumerId,  customer.ServiceList, customer.Comment);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -119,8 +116,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut]
         public IActionResult Put([FromRoute] int companyId, int customerId) {
             try {
-                var ret = _custumerApp.EndCustomerService(customerId, companyId);
-                return Ok(ret);
+                 _service.EndCustomerService(customerId, companyId);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -138,7 +135,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut]
         public IActionResult Get([FromRoute] int customerId) {
             try {
-                var ret = _custumerApp.ElapsedTime(customerId);
+                var ret = _service.ElapsedTime(customerId);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -147,16 +144,5 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-
-
-        /// <summary>
-        /// Altera a posição do cliente na fila
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <returns></returns>
-        //[Route("ChangePositionInQueue")]
-        //[HttpPost]
-        //public IActionResult Put([FromBody] CustumerContainerDto customer) {
-        //}        
     }
 }

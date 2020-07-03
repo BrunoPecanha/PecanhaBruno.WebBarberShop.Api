@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.CrossCutting.EntryContainers.Creating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntitiesDto.Updating;
-using PecanhaBruno.WebBarberShop.CrossCutting.EntryContainers;
+using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
@@ -11,10 +10,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     [AllowAnonymous]
     [Route("api/Queue")]
     public class QueueController : ControllerBase {
-        private readonly ICurrentQueueService _queueApp;
+        private readonly ICurrentQueueService _queueService;
 
         public QueueController(ICurrentQueueService queueApp) {
-            _queueApp = queueApp;
+            _queueService = queueApp;
         }
 
         /// <summary>
@@ -22,11 +21,11 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="queue">Dto de entrada para criação da fila</param>
         /// <returns></returns>
-        [Route("CreateQueue")]  // Colocar para o ID da fila ser somente o id do TO
+        [Route("CreateQueue")]  
         [HttpPost]
-        public IActionResult Post([FromBody] QueueContainer queue) {
+        public IActionResult Post([FromBody] CreatingQueueDto queue) {
             try {
-                var ret = _queueApp.StartQueue(queue.ToEntity());
+                var ret = _queueService.StartQueue(queue.ToEntity());
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -46,7 +45,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpGet]
         public IActionResult GetAll([FromRoute] int page, int qtd) {
             try {
-                var ret = _queueApp.GetAllCurrentQueues(page, qtd);
+                var ret = _queueService.GetAllCurrentQueues(page, qtd);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -63,9 +62,9 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <returns></returns>
         [Route("GetQueue/{id}")]
         [HttpGet]
-        public IActionResult GetById([FromRoute]int id) {
+        public IActionResult GetById([FromRoute] int id) {
             try {
-                var ret = _queueApp.GetById(id);
+                var ret = _queueService.GetById(id);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -83,7 +82,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <returns></returns>
         [Route("IsThereQueueStarted/{companyId}")]
         [HttpGet]
-        public IActionResult IsThereQueueStarted([FromServices] ICurrentQueueRepository repository, [FromRoute]int companyId) {
+        public IActionResult IsThereQueueStarted([FromServices] ICurrentQueueRepository repository, [FromRoute] int companyId) {
             try {
                 var ret = repository.IsThereQueueStarted(companyId);
                 return Ok(new DefaultOutPutContainer() {
@@ -107,10 +106,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <returns></returns>
         [Route("FinishQueue/{companyId}/{userId}")]
         [HttpPut]
-        public IActionResult Put([FromRoute]int companyId, int userId) {
+        public IActionResult Put([FromRoute] int companyId, int userId) {
             try {
-                _queueApp.FinishQueue(companyId, userId);
-                return Ok();               
+                _queueService.FinishQueue(companyId, userId);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -128,7 +127,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpGet]
         public IActionResult GetAll([FromRoute] int companyId) {
             try {
-                var ret = _queueApp.GetAllCustumersInCurrentQueue(companyId);
+                var ret = _queueService.GetAllCustumersInCurrentQueue(companyId);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -147,7 +146,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpGet]
         public IActionResult GetLastInCurrentQueue([FromRoute] int companyId) {
             try {
-                var ret = _queueApp.GetLastInCurrentQueue(companyId);
+                var ret = _queueService.GetLastInCurrentQueue(companyId);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {

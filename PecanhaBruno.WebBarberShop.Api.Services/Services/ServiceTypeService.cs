@@ -3,6 +3,8 @@ using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using PecanhaBruno.WebBarberShop.Infra.Context;
+using PecanhaBruno.WebBarberShop.Service.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,6 +34,11 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
         }
 
         public void UpdateService(ServiceType serviceType) {
+            if (serviceType is null) {
+                throw new Exception(Resources.mNoServiceWasFound);
+            }
+
+            serviceType.Validate();
             _ServiceRepository.Update(serviceType);
         }
 
@@ -47,7 +54,6 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
                 _ServiceRepository.Update(service);
             } else {
                 _ServiceRepository.Remove(service);
-
             }
         }
 
@@ -69,16 +75,6 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
                            .Where(x => x.Custumer.Id == customerId)
                            .Select(x => x.Service)
                            .ToList();                           
-        }
-
-        /// <summary>
-        /// Recupera todos os serviços de acordo com o array de serviços recebido
-        /// </summary>
-        /// <param name="ids">Identificador dos serviços.</param>
-        /// <returns></returns>
-        public ICollection<ServiceType> GetListByIds(int[] ids)
-        {
-            return _ServiceRepository.GetListByIds(ids);
-        }
+        }       
     }
 }
