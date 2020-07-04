@@ -22,7 +22,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PecanhaBruno.WebBarberShop.Application.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PecanhaBruno.WebBarberShop.Service.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No amount was found for this company..
         /// </summary>
-        internal static string mAmountNotFound {
+        public static string mAmountNotFound {
             get {
                 return ResourceManager.GetString("mAmountNotFound", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Can&apos;t delete owner user..
         /// </summary>
-        internal static string mCantDeleteOwnerUser {
+        public static string mCantDeleteOwnerUser {
             get {
                 return ResourceManager.GetString("mCantDeleteOwnerUser", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The regist could not be deleted, because there&apos;s relation between other tables. The regist was marked as &quot;not Activated&quot;..
         /// </summary>
-        internal static string mCantDeleteThereIsRelation {
+        public static string mCantDeleteThereIsRelation {
             get {
                 return ResourceManager.GetString("mCantDeleteThereIsRelation", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This company is not associated to this user..
         /// </summary>
-        internal static string mCompanyNotAssociatedToThisUser {
+        public static string mCompanyNotAssociatedToThisUser {
             get {
                 return ResourceManager.GetString("mCompanyNotAssociatedToThisUser", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Company was not found..
         /// </summary>
-        internal static string mCompanyNotFound {
+        public static string mCompanyNotFound {
             get {
                 return ResourceManager.GetString("mCompanyNotFound", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Customer is already in queue.
         /// </summary>
-        internal static string mCustomerAlreadyInQueue {
+        public static string mCustomerAlreadyInQueue {
             get {
                 return ResourceManager.GetString("mCustomerAlreadyInQueue", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Customer was deleted..
         /// </summary>
-        internal static string mCustomerDeleted {
+        public static string mCustomerDeleted {
             get {
                 return ResourceManager.GetString("mCustomerDeleted", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Customer is not in service to be finished..
         /// </summary>
-        internal static string mCustomerIsNotInService {
+        public static string mCustomerIsNotInService {
             get {
                 return ResourceManager.GetString("mCustomerIsNotInService", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Customer not found.
         /// </summary>
-        internal static string mCustomerNotFound {
+        public static string mCustomerNotFound {
             get {
                 return ResourceManager.GetString("mCustomerNotFound", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This email is already in use..
         /// </summary>
-        internal static string mEmailAlreadyInUse {
+        public static string mEmailAlreadyInUse {
             get {
                 return ResourceManager.GetString("mEmailAlreadyInUse", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Erro while processing..
         /// </summary>
-        internal static string mErrorInProcess {
+        public static string mErrorInProcess {
             get {
                 return ResourceManager.GetString("mErrorInProcess", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Can&apos;t find company with id {0}.
         /// </summary>
-        internal static string mNoCompanyWasFoundWithId {
+        public static string mNoCompanyWasFoundWithId {
             get {
                 return ResourceManager.GetString("mNoCompanyWasFoundWithId", resourceCulture);
             }
@@ -171,28 +171,25 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No more customers..
         /// </summary>
-        internal static string mNoMoreCustomers {
+        public static string mNoMoreCustomers {
             get {
                 return ResourceManager.GetString("mNoMoreCustomers", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to No more customers..
+        ///   Looks up a localized string similar to No owner was found..
         /// </summary>
-        internal static string mNoOwnerUserWasFound
-        {
-            get
-            {
+        public static string mNoOwnerUserWasFound {
+            get {
                 return ResourceManager.GetString("mNoOwnerUserWasFound", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This user doesn&apos;t has permission to start a queue..
         /// </summary>
-        internal static string mNoPermissionStartQueue {
+        public static string mNoPermissionStartQueue {
             get {
                 return ResourceManager.GetString("mNoPermissionStartQueue", resourceCulture);
             }
@@ -201,7 +198,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No queu was found with id {0}.
         /// </summary>
-        internal static string mNoQueueWasFound {
+        public static string mNoQueueWasFound {
             get {
                 return ResourceManager.GetString("mNoQueueWasFound", resourceCulture);
             }
@@ -210,7 +207,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No service was found.
         /// </summary>
-        internal static string mNoServiceWasFound {
+        public static string mNoServiceWasFound {
             get {
                 return ResourceManager.GetString("mNoServiceWasFound", resourceCulture);
             }
@@ -219,7 +216,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No service was found for this company..
         /// </summary>
-        internal static string mNoServiceWasFoundForThisCompany {
+        public static string mNoServiceWasFoundForThisCompany {
             get {
                 return ResourceManager.GetString("mNoServiceWasFoundForThisCompany", resourceCulture);
             }
@@ -228,7 +225,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No service was found for this customer..
         /// </summary>
-        internal static string mNoServiceWasFoundForThisCustomer {
+        public static string mNoServiceWasFoundForThisCustomer {
             get {
                 return ResourceManager.GetString("mNoServiceWasFoundForThisCustomer", resourceCulture);
             }
@@ -237,7 +234,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Can&apos;t find user with id {0}.
         /// </summary>
-        internal static string mNoUserWasFoundWithId {
+        public static string mNoUserWasFoundWithId {
             get {
                 return ResourceManager.GetString("mNoUserWasFoundWithId", resourceCulture);
             }
@@ -246,7 +243,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string mOk {
+        public static string mOk {
             get {
                 return ResourceManager.GetString("mOk", resourceCulture);
             }
@@ -255,7 +252,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Queue already  started for {0}..
         /// </summary>
-        internal static string mQueueAlreadyStarted {
+        public static string mQueueAlreadyStarted {
             get {
                 return ResourceManager.GetString("mQueueAlreadyStarted", resourceCulture);
             }
@@ -264,7 +261,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The company is not associated to user..
         /// </summary>
-        internal static string mQueueCompanyNotAssociatedToUser {
+        public static string mQueueCompanyNotAssociatedToUser {
             get {
                 return ResourceManager.GetString("mQueueCompanyNotAssociatedToUser", resourceCulture);
             }
@@ -273,7 +270,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Queue for company {0} ended sucessfully.
         /// </summary>
-        internal static string mQueueEnded {
+        public static string mQueueEnded {
             get {
                 return ResourceManager.GetString("mQueueEnded", resourceCulture);
             }
@@ -282,7 +279,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The queue is not available..
         /// </summary>
-        internal static string mQueueNotAvailable {
+        public static string mQueueNotAvailable {
             get {
                 return ResourceManager.GetString("mQueueNotAvailable", resourceCulture);
             }
@@ -291,7 +288,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Queue started suceed for {0}..
         /// </summary>
-        internal static string mQueueStartedSuceed {
+        public static string mQueueStartedSuceed {
             get {
                 return ResourceManager.GetString("mQueueStartedSuceed", resourceCulture);
             }
@@ -300,7 +297,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Queue started sucessfully for company id {0}.
         /// </summary>
-        internal static string mQueueSucessStarted {
+        public static string mQueueSucessStarted {
             get {
                 return ResourceManager.GetString("mQueueSucessStarted", resourceCulture);
             }
@@ -309,7 +306,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This user is not allowed to create a queue.
         /// </summary>
-        internal static string mQueueUserNotAuthorized {
+        public static string mQueueUserNotAuthorized {
             get {
                 return ResourceManager.GetString("mQueueUserNotAuthorized", resourceCulture);
             }
@@ -318,7 +315,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Returned all customers in queue with id {0}.
         /// </summary>
-        internal static string mReturnedAllCustomersInQueue {
+        public static string mReturnedAllCustomersInQueue {
             get {
                 return ResourceManager.GetString("mReturnedAllCustomersInQueue", resourceCulture);
             }
@@ -327,16 +324,16 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Successfully Created..
         /// </summary>
-        internal static string mSucceedCreated {
+        public static string mSucceedCreated {
             get {
                 return ResourceManager.GetString("mSucceedCreated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SuccessfullyDeleted..
+        ///   Looks up a localized string similar to Successfully deleted..
         /// </summary>
-        internal static string mSuceedDeleted {
+        public static string mSuceedDeleted {
             get {
                 return ResourceManager.GetString("mSuceedDeleted", resourceCulture);
             }
@@ -345,7 +342,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to SuccessfullyUpdated..
         /// </summary>
-        internal static string mSuceedUpdated {
+        public static string mSuceedUpdated {
             get {
                 return ResourceManager.GetString("mSuceedUpdated", resourceCulture);
             }
@@ -354,7 +351,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to There&apos;s no open amount today for company id {0}.
         /// </summary>
-        internal static string mThereNoAmountForToday {
+        public static string mThereNoAmountForToday {
             get {
                 return ResourceManager.GetString("mThereNoAmountForToday", resourceCulture);
             }
@@ -363,7 +360,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The amount was updated..
         /// </summary>
-        internal static string mUpdateAmount {
+        public static string mUpdateAmount {
             get {
                 return ResourceManager.GetString("mUpdateAmount", resourceCulture);
             }
@@ -372,7 +369,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to User inserted in queue in {0}..
         /// </summary>
-        internal static string mUserInsertedInQueue {
+        public static string mUserInsertedInQueue {
             get {
                 return ResourceManager.GetString("mUserInsertedInQueue", resourceCulture);
             }
@@ -381,7 +378,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No user was found..
         /// </summary>
-        internal static string mUserNotFound {
+        public static string mUserNotFound {
             get {
                 return ResourceManager.GetString("mUserNotFound", resourceCulture);
             }
@@ -390,7 +387,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to User&apos;s services updated.
         /// </summary>
-        internal static string mUserServicesUpdated {
+        public static string mUserServicesUpdated {
             get {
                 return ResourceManager.GetString("mUserServicesUpdated", resourceCulture);
             }
@@ -399,7 +396,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Properties {
         /// <summary>
         ///   Looks up a localized string similar to User&apos;s services are already done.
         /// </summary>
-        internal static string mUsersServicesAlreadyDone {
+        public static string mUsersServicesAlreadyDone {
             get {
                 return ResourceManager.GetString("mUsersServicesAlreadyDone", resourceCulture);
             }

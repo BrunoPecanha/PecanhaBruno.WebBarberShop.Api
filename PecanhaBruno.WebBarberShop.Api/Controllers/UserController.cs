@@ -41,10 +41,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 return BadRequest(ex.Message);
             }
         }
-
-
-        [Route("GetAll")]
-        [HttpGet]
+       
+        [HttpGet("GetAll")]
         public IActionResult GetAll(int companyId)
         {
             try
@@ -61,10 +59,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-
-
-        [Route("GetById")]
-        [HttpGet]
+       
+        [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
             try

@@ -39,9 +39,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-
-        [Route("GetById")]
-        [HttpGet]
+      
+        [HttpGet("GetById")]
         public IActionResult GetById(int id) {
             try {
                 var ret = _service.GetById(id);
@@ -53,9 +52,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-
-        [Route("GetCostumerByName/{name}")]
-        [HttpGet]
+        
+        [HttpGet("GetCostumerByName/{name}")]
         public IActionResult GetCostumerByName([FromRoute] string name) {
             try {
                 var ret = _service.GetCustomerByName(name);
@@ -73,8 +71,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="id">Id do cliente.</param>
         /// <returns></returns>
-        [Route("Delete")]
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public IActionResult Delete(int id) {
             try {
                  _service.DeleteFromQueue(id);
@@ -91,9 +88,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// Atualiza os serviços do usuário.
         /// </summary>
         /// <param name="customer">Objeto do cliente.</param>
-        /// <returns></returns>
-        [Route("UpdateCustomerServices")]
-        [HttpPut]
+        /// <returns></returns>        
+        [HttpPut("UpdateCustomerServices")]
         public IActionResult Put([FromBody] UpdatingCustumerDto customer) {
             try {
                  _service.UpdateCustomer(customer.CompanyId, customer.CustumerId,  customer.ServiceList, customer.Comment);
@@ -112,8 +108,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <param name="customerId">Id do cliente.</param>
         /// <param name="customerId">Id da empresa.</param>
         /// <returns></returns>
-        [Route("EndCustomerService/{companyId}/{customerId}")]
-        [HttpPut]
+        [HttpPut("EndCustomerService/{companyId}/{customerId}")]
         public IActionResult Put([FromRoute] int companyId, int customerId) {
             try {
                  _service.EndCustomerService(customerId, companyId);
@@ -130,9 +125,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// Consulta quanto tempo o cliente está esperando.
         /// </summary>
         /// <param name="customerId">Id do cliente.</param>
-        /// <returns></returns>
-        [Route("ElapsedTime/{customerId}")]
-        [HttpPut]
+        /// <returns></returns>        
+        [HttpPut("ElapsedTime/{customerId}")]
         public IActionResult Get([FromRoute] int customerId) {
             try {
                 var ret = _service.ElapsedTime(customerId);

@@ -14,8 +14,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             _dayBalanceService = dayBalanceService;
         }
 
-        [Route("Withdraw/{companyId}/{value}")]
-        [HttpPost]
+        [HttpPost("Withdraw/{companyId}/{value}")]
         public IActionResult Withdraw([FromRoute] int companyId, decimal value) {
             try {
                 _dayBalanceService.Withdraw(companyId, value);
@@ -28,8 +27,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             }
         }
 
-        [Route("Deposit/{companyId}/{value}")]
-        [HttpPost]
+        [HttpPost("Deposit/{companyId}/{value}")]
         public IActionResult Deposit([FromRoute] int companyId, decimal value) {
             try {
                 _dayBalanceService.Deposit(companyId, value);
@@ -45,8 +43,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             }
         }
 
-        [Route("Amount/{companyId}")]
-        [HttpGet]
+        [HttpGet("Amount/{companyId}")]
         public IActionResult Amount([FromRoute] int companyId) {
             try {
                 var ret = _dayBalanceService.DayAmount(companyId);

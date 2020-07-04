@@ -20,7 +20,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
             User user = _userRepository.GetById(company.UserId);
 
             if (user is null) {
-                throw new Exception(Resources.mNoMoreCustomers);
+                throw new Exception(Resources.mUserNotFound);
             }
 
             company.UpdateUser(company.UserId);
