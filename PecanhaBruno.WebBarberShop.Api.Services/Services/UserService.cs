@@ -10,13 +10,11 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
     public class UserService : ServiceBase<User>, IUserService
     {
         private readonly IUserRepository _repository;
-        private readonly IUserService _service;
 
-        public UserService(IUserRepository repository, IUserService service)
+        public UserService(IUserRepository repository)
             : base(repository)
         {
-            _repository = repository;
-            _service = service;
+            _repository = repository;            
         }
 
         public DefaultOutPutContainer CreateNewUser(User user)
@@ -24,7 +22,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
             if (_repository.IsThereAlreadyThisEmail(user.Email))
                 throw new Exception(Resources.mEmailAlreadyInUse);
 
-            _service.CreateNewUser(user);
+            _repository.Add(user);
 
             return new DefaultOutPutContainer()
             {
@@ -54,11 +52,11 @@ namespace PecanhaBruno.WebBarberShop.Service.Services
             if (isThereTransactionsForThisUser)
             {
                 user.UpdateActivated(false);
-                _service.Update(user);
+                _repository.Update(user);
             }
             else
             {
-                _service.Remove(user);
+                _repository.Remove(user);
             }
 
             return new DefaultOutPutContainer()

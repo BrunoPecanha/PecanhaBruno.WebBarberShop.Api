@@ -70,7 +70,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             try {
                 _service.UpdateCompany(company.ToEntity());
                 return Ok();
-            } catch (Exception ex) {
+            } catch (Exception ex) { 
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message

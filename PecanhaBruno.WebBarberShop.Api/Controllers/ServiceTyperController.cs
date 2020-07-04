@@ -30,8 +30,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        [Route("Register")]
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult Post([FromBody] CreatingServiceTypeDto service) {
             try {
                  _service.CreateNewService(service.ToEntity());
@@ -51,8 +50,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// <param name="page">Pagina que se deseja</param>
         /// <param name="qtd">Quantidade de registros</param>
         /// <returns></returns>
-        [Route("GetAll/{companyId}/{page}/{qtd}")]
-        [HttpGet]
+        [HttpGet("GetAll/{companyId}/{page}/{qtd}")]
         public IActionResult GetAll([FromRoute] int companyId, int page, int qtd) {
             try {
                 var ret = _service.GetAllServicesType(companyId, page, qtd);
@@ -70,8 +68,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Route("GetById")]
-        [HttpGet]
+        [HttpGet("GetById")]
         public IActionResult GetById(int id) {
             try {
                 var ret = _service.GetById(id);
@@ -90,7 +87,6 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// </summary>
         /// <param name="serviceDto">Dto de entrada.</param>
         /// <returns></returns>
-        [Route("Update")]
         [HttpPut]
         public IActionResult Put(UpdatingServiceTypeDto serviceDto) {
             try {

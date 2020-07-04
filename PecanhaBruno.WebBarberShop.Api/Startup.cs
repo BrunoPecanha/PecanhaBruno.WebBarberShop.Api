@@ -23,8 +23,8 @@ namespace PecanhaBruno.WebBarberShop.Api {
             services.AddSwaggerGen(x =>
             {
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "Web BarberShopp Api", Version = "v1" });
-            });
-          
+            });          
+
             services.AddMvc().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -44,19 +44,16 @@ namespace PecanhaBruno.WebBarberShop.Api {
                 app.UseHsts();
             }
 
-
+           
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
-            app.UseSwagger(options =>
-            {
-                options.RouteTemplate = swaggerOptions.JsonRoute;
-            });
+            app.UseSwagger();
 
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
-                options.RoutePrefix = string.Empty;
+               
             });
 
             app.UseRouting();

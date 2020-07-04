@@ -21,8 +21,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="queue">Dto de entrada para criação da fila</param>
         /// <returns></returns>
-        [Route("CreateQueue")]  
-        [HttpPost]
+        [HttpPost("CreateQueue")]
         public IActionResult Post([FromBody] CreatingQueueDto queue) {
             try {
                 var ret = _queueService.StartQueue(queue.ToEntity());
@@ -41,8 +40,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <param name="page">Número da página atual.</param>
         /// <param name="qtd">Quantidade de itens por página.</param>
         /// <returns></returns>
-        [Route("GetAllQueues/{page}/{qtd}")]
-        [HttpGet]
+        [HttpGet("GetAllQueues/{page}/{qtd}")]
         public IActionResult GetAll([FromRoute] int page, int qtd) {
             try {
                 var ret = _queueService.GetAllCurrentQueues(page, qtd);
@@ -60,8 +58,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="id">Id da fila.</param>
         /// <returns></returns>
-        [Route("GetQueue/{id}")]
-        [HttpGet]
+        [HttpGet("GetQueue/{id}")]
         public IActionResult GetById([FromRoute] int id) {
             try {
                 var ret = _queueService.GetById(id);
@@ -80,8 +77,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <param name="repository">Instância de repositório para fila.</param>
         /// <param name="companyId">Id da empresa.</param>
         /// <returns></returns>
-        [Route("IsThereQueueStarted/{companyId}")]
-        [HttpGet]
+        [HttpGet("IsThereQueueStarted/{companyId}")]
         public IActionResult IsThereQueueStarted([FromServices] ICurrentQueueRepository repository, [FromRoute] int companyId) {
             try {
                 var ret = repository.IsThereQueueStarted(companyId);
@@ -104,8 +100,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// <param name="companyId">Id da empresa.</param>
         /// <param name="userId">Id do usuário dono da fila ( e da empresa ).</param>
         /// <returns></returns>
-        [Route("FinishQueue/{companyId}/{userId}")]
-        [HttpPut]
+        [HttpPut("FinishQueue/{companyId}/{userId}")]
         public IActionResult Put([FromRoute] int companyId, int userId) {
             try {
                 _queueService.FinishQueue(companyId, userId);
@@ -123,8 +118,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="companyId">Id da empresa.</param>
         /// <returns></returns>
-        [Route("GetAllCustumersInCurrentQueue/{companyId}")]
-        [HttpGet]
+        [HttpGet("GetAllCustumersInCurrentQueue/{companyId}")]
         public IActionResult GetAll([FromRoute] int companyId) {
             try {
                 var ret = _queueService.GetAllCustumersInCurrentQueue(companyId);
@@ -142,8 +136,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="companyId">Id da empresa.</param>
         /// <returns></returns>
-        [Route("GetLastInCurrentQueue/{companyId}")]
-        [HttpGet]
+        [HttpGet("GetLastInCurrentQueue/{companyId}")]
         public IActionResult GetLastInCurrentQueue([FromRoute] int companyId) {
             try {
                 var ret = _queueService.GetLastInCurrentQueue(companyId);

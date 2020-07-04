@@ -13,6 +13,7 @@ namespace PecanhaBruno.WebBarberShop.Service
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services, string connectionString)
         {
+            
             services.AddDbContext<WebBarberShoppContext>(o => o.UseSqlServer(connectionString));
 
             services.AddTransient<ICompanyService, CompanyService>();

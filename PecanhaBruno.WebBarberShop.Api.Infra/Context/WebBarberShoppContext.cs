@@ -11,6 +11,10 @@ namespace Pecanha.WebBaberShopp.Infra.Context {
                 : base(options) {
         }
 
+        public WebBarberShoppContext()
+               : base() {
+        }
+
         public DbSet<Custumer> Custumer { get; set; }
         public DbSet<CurrentQueue> Queue { get; set; }
         public DbSet<ScheduleDay> ScheduleDay { get; set; }
