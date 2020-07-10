@@ -1,26 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
     public class UpdatingCustumerDto {
         /// <summary>
         /// Id do cliente
         /// </summary>
-        public int CustumerId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "CustomerId")]
+        public int CustomerId { get; set; }
 
         // <summary>
         /// Id da empresa
         /// </summary>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "CompanyId")]
         public int CompanyId { get; set; }
 
         /// <summary>
         /// Lista de serviços escolhidos pelo usuário.
-        /// </summary>        
+        /// </summary>  
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "ServiceList")]
         public int[] ServiceList { get; set; }
 
         /// <summary>
         /// Objeto usuário que será atribuído o serviço.
         /// </summary>
-        public string Comment { get; set; }
+        [Display(Name = "Comment")]
+        public string Comment { get; set; }       
     }
 }

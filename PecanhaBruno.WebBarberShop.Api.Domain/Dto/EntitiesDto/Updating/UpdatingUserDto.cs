@@ -1,9 +1,7 @@
-﻿using PecanhaBruno.WebBarberShop.Domain.Dto;
-using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 
-namespace Pecanha.WebBarberShopp.Domain.EntryContainers.Creating
-{
-    public class UserContainerCreating
+namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
+    public class UpdatingUserDto
     {
         /// <summary>
         /// Cabecalho da mensagem

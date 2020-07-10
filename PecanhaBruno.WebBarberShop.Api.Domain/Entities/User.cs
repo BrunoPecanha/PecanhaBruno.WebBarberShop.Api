@@ -75,7 +75,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Lista dos clientes
         /// </summary>
-        public ICollection<Custumer> Custumer { get; private set; }
+        public ICollection<Customer> Custumer { get; private set; }
 
         /// <summary>
         /// Atualiza o nome do usuário.

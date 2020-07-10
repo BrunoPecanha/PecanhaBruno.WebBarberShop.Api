@@ -4,7 +4,7 @@ using PecanhaBruno.WebBarberShop.Domain.Entities;
 namespace PecanhaBruno.WebBarberShop.Infra.Context {
     public interface IWebBarberShoppContext
     {
-        DbSet<Custumer> Custumer { get; }
+        DbSet<Customer> Custumer { get; }
         DbSet<CurrentQueue> Queue { get; }
         DbSet<ScheduleDay> ScheduleDay { get; }
         DbSet<ServiceType> ServiceType { get; }

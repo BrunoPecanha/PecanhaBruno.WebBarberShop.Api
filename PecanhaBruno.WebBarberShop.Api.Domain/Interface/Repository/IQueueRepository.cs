@@ -51,7 +51,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository {
         /// </summary>
         /// <param name="companyId">Id da empresa.</param>
         /// <returns></returns>
-        ICollection<Custumer> GetAllCustumersInCurrentQueue(int companyId);
+        ICollection<Customer> GetAllCustumersInCurrentQueue(int companyId);
         User GetLastInCurrentQueue(int companyId);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
@@ -28,9 +28,9 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// </summary>
         /// <param name="custumer">Usuário que será transformado em cliente.</param>
         [HttpPost]
-        public IActionResult Post([FromBody] CustumerContainerCreating custumer) {
+        public IActionResult Post([FromBody] CreatingCustomerDto custumer) {
             try {
-                _service.SaveCustumerSelectedServices(custumer.CustumerMessage.CompanyId, custumer.ToEntity(), custumer.CustumerMessage.ServiceList);
+                _service.SaveCustumerSelectedServices(custumer.CompanyId, custumer.ToEntity(), custumer.ServiceList);
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -39,7 +39,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-      
+
         [HttpGet("GetById")]
         public IActionResult GetById(int id) {
             try {
@@ -52,7 +52,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
                 });
             }
         }
-        
+
         [HttpGet("GetCostumerByName/{name}")]
         public IActionResult GetCostumerByName([FromRoute] string name) {
             try {
@@ -74,7 +74,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpDelete("Delete")]
         public IActionResult Delete(int id) {
             try {
-                 _service.DeleteFromQueue(id);
+                _service.DeleteFromQueue(id);
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -92,7 +92,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut("UpdateCustomerServices")]
         public IActionResult Put([FromBody] UpdatingCustumerDto customer) {
             try {
-                 _service.UpdateCustomer(customer.CompanyId, customer.CustumerId,  customer.ServiceList, customer.Comment);
+                _service.UpdateCustomer(customer.CompanyId, customer.CustomerId, customer.ServiceList, customer.Comment);
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
@@ -111,7 +111,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut("EndCustomerService/{companyId}/{customerId}")]
         public IActionResult Put([FromRoute] int companyId, int customerId) {
             try {
-                 _service.EndCustomerService(customerId, companyId);
+                _service.EndCustomerService(customerId, companyId);
                 return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {

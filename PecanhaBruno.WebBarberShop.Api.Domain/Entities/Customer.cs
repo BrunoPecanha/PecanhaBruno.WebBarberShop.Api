@@ -5,11 +5,11 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
     /// <summary>
     /// Classe que trata do cliente que será incluído na fila.
     /// </summary>
-    public class Custumer : To {
-        private Custumer() {
+    public class Customer : To {
+        private Customer() {
         }
 
-        public Custumer(int userId, int queueId, string comment, int queuePosition) {
+        public Customer(int userId, int queueId, string comment, int queuePosition) {
             IsServiceDone = false;
             UserId = userId;
             Comment = comment.ToUpper();
@@ -74,7 +74,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
                 this.Comment = comment.ToUpper();
         }
 
-        public bool UpdateCustumerPositionInQueue(Custumer customerOrin, Custumer customerDest) {
+        public bool UpdateCustumerPositionInQueue(Customer customerOrin, Customer customerDest) {
             if (customerOrin is null || customerDest is null) {
                 var positionTemp = customerOrin.QueuePosition;
                 customerOrin.QueuePosition = customerDest.QueuePosition;

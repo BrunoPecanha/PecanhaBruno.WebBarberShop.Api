@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
     public class CreatingCompanyDto {
@@ -54,5 +55,9 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "UserId")]
         public int UserId { get; set; }
+
+        public Company ToEntity() {
+            return new Company(FantasyName.ToUpper(), RealName.ToUpper(), Cnpj, Address.ToUpper(), UseQueue, Logo, ConfirmationNotice, UserId);
+        }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
-using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
-using Pecanha.WebBarberShopp.Domain.EntryContainers.Updating;
+using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
+using System;
 
 namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     [AllowAnonymous]
@@ -20,7 +20,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CompanyContainerCreating company) {
+        public IActionResult Post([FromBody] CreatingCompanyDto company) {
             try {
                 _service.CreateNewCompany(company.ToEntity());
                 return Ok();
@@ -66,11 +66,11 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         }
 
         [HttpPut]
-        public IActionResult Put(CompanyContainerUpdating company) {
+        public IActionResult Put(UpdatingCompanyDto company) {
             try {
                 _service.UpdateCompany(company.ToEntity());
                 return Ok();
-            } catch (Exception ex) { 
+            } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message

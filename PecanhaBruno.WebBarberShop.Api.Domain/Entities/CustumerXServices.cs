@@ -6,7 +6,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         private CustumerXServices() {
         }
 
-        public CustumerXServices(ServiceType serviceType, Custumer custumer) {           
+        public CustumerXServices(ServiceType serviceType, Customer custumer) {           
             this.CustumerId = custumer.Id;        
             this.ServiceId = serviceType.Id;
         }
@@ -18,7 +18,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Propriedade que indica que é um relacionamento NxM
         /// </summary>
-        public virtual Custumer Custumer { get; private set; }
+        public virtual Customer Custumer { get; private set; }
         /// <summary>
         /// Propriedade que indica que é um relacionamento NxM
         /// </summary>

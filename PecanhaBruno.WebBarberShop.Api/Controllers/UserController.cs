@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pecanha.WebBarberShopp.Domain.EntryContainers.Creating;
-using Pecanha.WebBarberShopp.Domain.EntryContainers.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
+using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
@@ -13,8 +13,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     /// </summary>
     [AllowAnonymous]
     [Route("api/User")]
-    public class UserController : ControllerBase
-    {
+    public class UserController : ControllerBase {
         private readonly IUserService _service;
         private readonly IUserRepository _repository;
 
@@ -22,56 +21,41 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         /// Controller do usuário
         /// </summary>
         /// <param name="userApp">Parâmetro injetado pelo container de IoC.</param>
-        public UserController(IUserService service, IUserRepository repository)
-        {
+        public UserController(IUserService service, IUserRepository repository) {
             _service = service;
             _repository = repository;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] UserContainerCreating user)
-        {
-            try
-            {
+        public IActionResult Post([FromBody] CreatingUserDto user) {
+            try {
                 _service.CreateNewUser(user.ToEntity());
                 return Ok();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return BadRequest(ex.Message);
             }
         }
-       
+
         [HttpGet("GetAll")]
-        public IActionResult GetAll(int companyId)
-        {
-            try
-            {
+        public IActionResult GetAll(int companyId) {
+            try {
                 var ret = _repository.GetAllUsers(companyId);
                 return Ok(ret);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new DefaultOutPutContainer()
-                {
+            } catch (Exception ex) {
+                return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message
                 });
             }
         }
-       
+
         [HttpGet("GetById")]
-        public IActionResult GetById(int id)
-        {
-            try
-            {
+        public IActionResult GetById(int id) {
+            try {
                 var ret = _repository.GetById(id);
                 return Ok(ret);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new DefaultOutPutContainer()
-                {
+            } catch (Exception ex) {
+                return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
                     Valid = false,
                     Message = ex.Message
@@ -81,17 +65,12 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
 
 
         [HttpPut]
-        public IActionResult Put(UserContainerUpdating user)
-        {
-            try
-            {
+        public IActionResult Put(UpdatingUserDto user) {
+            try {
                 var ret = _service.UpdateUser(user.ToEntity());
                 return Ok(ret);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new DefaultOutPutContainer()
-                {
+            } catch (Exception ex) {
+                return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
                     Message = ex.Message
                 });
@@ -101,17 +80,12 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
 
 
         [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            try
-            {
+        public IActionResult Delete(int id) {
+            try {
                 var ret = _service.DeleteUser(id);
                 return Ok(ret);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new DefaultOutPutContainer()
-                {
+            } catch (Exception ex) {
+                return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
                     Valid = false,
                     Message = ex.Message

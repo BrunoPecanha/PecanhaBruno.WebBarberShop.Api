@@ -24,19 +24,19 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Lista dos usuários da fila no momento
         /// </summary>
-        public ICollection<Custumer> Custumers { get; set; }
+        public ICollection<Customer> Custumers { get; set; }
         /// <summary>
         ///  Próximo da fila.
         /// </summary>
-        public Custumer Next { get; set; }
+        public Customer Next { get; set; }
         /// <summary>
         /// Atualmente na fila
         /// </summary>
-        public Custumer Current { get; set; }
+        public Customer Current { get; set; }
         /// <summary>
         /// Último da fila
         /// </summary>
-        public Custumer Last { get; set; }
+        public Customer Last { get; set; }
         /// <summary>
         /// Tempo estimado para o próximo da fila
         /// </summary>
