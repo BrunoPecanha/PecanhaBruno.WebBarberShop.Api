@@ -1,12 +1,15 @@
 ﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
     public class UpdatingUserDto
     {
         /// <summary>
-        /// Cabecalho da mensagem
+        /// Informações do aparelho.
         /// </summary>
-        public MessageHead Head { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
+        [Display(Name = "MobileInfo")]
+        public string MobileInfo { get; set; }
 
         /// <summary>
         /// Nome do usuário
@@ -47,7 +50,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
         /// </summary>
         /// <returns></returns>
         public User ToEntity() {
-            return new User(Name, LastName, Picture, Email, PassWord, Owner, Head.MobileInfo);
+            return new User(Name, LastName, Picture, Email, PassWord, Owner, MobileInfo);
         }
     }
 }

@@ -5,11 +5,11 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
     public class CreatingUserDto
     {
         /// <summary>
-        /// Cabecalho da mensagem
+        /// Informações do aparelho.
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
-        [Display(Name = "Head")]
-        public MessageHead Head { get; set; }
+        [Display(Name = "MobileInfo")]
+        public string MobileInfo { get; set; }
 
         /// <summary>
         /// Nome do usuário
@@ -65,7 +65,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
         /// </summary>
         /// <returns></returns>
         public User ToEntity() {
-            return new User(Name, LastName, Picture, Email, PassWord, Owner, Head.MobileInfo);
+            return new User(Name, LastName, Picture, Email, PassWord, Owner, MobileInfo);
         }
     }
 }
