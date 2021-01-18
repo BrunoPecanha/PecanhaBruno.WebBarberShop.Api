@@ -71,7 +71,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
         public bool CompanyHasTransactions(int companyId) {
             return _dbContext.Company
                             .Include(x => x.User)
-                            .ThenInclude(x => x.Custumer)
+                            .ThenInclude(x => x.Customer)
                             .Any(x => x.Id == companyId);
         }
     }

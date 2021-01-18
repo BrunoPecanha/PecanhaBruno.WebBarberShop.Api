@@ -39,7 +39,7 @@ namespace PecanhaBruno.WebBaberShop.Infra.Data.EntityConfig {
 
             builder
                 .HasOne(x => x.User)
-                .WithMany(x => x.Custumer)
+                .WithMany(x => x.Customer)
                 .HasForeignKey(x => x.UserId)
                 .IsRequired();
 
