@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PecanhaBruno.WebBarberShop.Domain.Entities;
 
 namespace PecanhaBruno.WebBaberShop.Infra.Data.EntityConfig {
-    public class CustumerConfiguration : IEntityTypeConfiguration<Custumer>
+    public class CustumerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Custumer> builder) {
+        public void Configure(EntityTypeBuilder<Customer> builder) {
 
             builder
                 .ToTable("Custumer")
@@ -39,7 +39,7 @@ namespace PecanhaBruno.WebBaberShop.Infra.Data.EntityConfig {
 
             builder
                 .HasOne(x => x.User)
-                .WithMany(x => x.Custumer)
+                .WithMany(x => x.Customer)
                 .HasForeignKey(x => x.UserId)
                 .IsRequired();
 

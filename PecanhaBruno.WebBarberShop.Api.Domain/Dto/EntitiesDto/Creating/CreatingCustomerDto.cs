@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
 {
-    public class CreatingCustumerDto
+    public class CreatingCustomerDto
     {
         /// <summary>
         /// Id da empresa a qual será associado o usuário.
@@ -38,5 +39,9 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "ServiceList")]
         public int[] ServiceList { get; set; }
+
+        public Customer ToEntity() {
+            return new Customer(UserId, QueueId, Comment, 0);
+        }
     }
 }

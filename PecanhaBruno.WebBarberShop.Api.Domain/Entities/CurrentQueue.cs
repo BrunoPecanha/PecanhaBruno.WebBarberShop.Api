@@ -38,7 +38,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Propriedade de ligação entre cliente e a fila
         /// </summary>
-        public ICollection<Custumer> Custumers { get; private set; }        
+        public ICollection<Customer> Custumers { get; private set; }        
         
         // <summary>
         /// Hora que foi finalizada a fila do dia

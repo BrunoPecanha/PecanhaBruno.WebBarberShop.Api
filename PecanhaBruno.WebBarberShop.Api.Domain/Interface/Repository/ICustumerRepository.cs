@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository {
-    public interface ICustumerRepository : IRepositoryBase<Custumer> {       
+    public interface ICustumerRepository : IRepositoryBase<Customer> {       
         bool IsCustomerAlreadyInQueue(int userId);
-        Custumer CallNextCustomerInQueue(int queueId);
-        IList<Custumer> GetCustomerByName(string name);
+        Customer CallNextCustomerInQueue(int queueId);
+        IList<Customer> GetCustomerByName(string name);
     }
 }

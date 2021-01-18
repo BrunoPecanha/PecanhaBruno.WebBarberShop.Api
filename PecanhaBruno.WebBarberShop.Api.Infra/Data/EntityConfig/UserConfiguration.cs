@@ -63,7 +63,7 @@ namespace PecanhaBruno.WebBaberShop.Infra.Data.EntityConfig {
                  .HasForeignKey<Company>(x => x.UserId);
 
             builder
-                .HasMany(x => x.Custumer)
+                .HasMany(x => x.Customer)
                 .WithOne(x => x.User);
         }
     }
