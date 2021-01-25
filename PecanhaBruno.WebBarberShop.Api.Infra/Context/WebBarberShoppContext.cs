@@ -33,7 +33,7 @@ namespace Pecanha.WebBaberShopp.Infra.Context {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
-                optionsBuilder.UseSqlServer(@"Server=localhost; Database = WebBarberShop; User ID = sa; Password = 13676616766;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(SqlHelper.ConnectionString);
             }
         }        
 
