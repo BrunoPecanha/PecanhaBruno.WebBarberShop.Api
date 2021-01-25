@@ -22,7 +22,6 @@ A ideia básica dessa aplicação é evitar que os clientes de barbearia, que tr
 *  XUnit; 
 *  Angular para web;
 *  React para app;
-*  React; 
 *  EntityFrameWork Core 
 * Trello ( Para gerenciamento das tarefas )
 
