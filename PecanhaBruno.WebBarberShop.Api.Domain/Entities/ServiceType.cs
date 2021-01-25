@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Entities {
     public class ServiceType : To {
@@ -31,11 +32,14 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
 
         public int CompanyId { get; private set; }
 
+        public string Img { get; private set; }
+
         public virtual Company Company { get; private set; }
 
         /// <summary>
         /// Referência dos serviços selecionados pelo cliente
         /// </summary>
+        [JsonIgnore]
         public virtual ICollection<CustumerXServices> CustumerServices { get; private set; }  
         
         //TODO - Método administrador geral para alterar uma empresa dona de um serviço
