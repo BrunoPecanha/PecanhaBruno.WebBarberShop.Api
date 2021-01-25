@@ -14,13 +14,15 @@ A ideia básica dessa aplicação é evitar que os clientes de barbearia, que tr
 
 # Recursos utilizados: 
 
-* .NetCore 2.2 com c#; 
+* .NetCore 2.2; 
 *  SqlServer; 
 *  Swagger; 
 *  Identity; *
 *  Migration; 
 *  XUnit; 
-*  Xamarin; 
+*  Angular para web;
+*  React para app;
+*  React; 
 *  EntityFrameWork Core 
 * Trello ( Para gerenciamento das tarefas )
 
@@ -53,12 +55,14 @@ The basic idea of this application is to avoid that the barbershop clients, who 
 * Output and input values; - Sangria and Contribution.
 
 # Resources used: 
-*  .NetCore 2.2 com c#; 
-*  SqlServer; - Swagger; 
+*  .NetCore 2.2; 
+*  SqlServer; 
+*  Swagger; 
 *  Identity; 
 *  Migration; 
 *  XUnit; 
-*  Xamarin; 
+*  Angular for web;
+*  React for app; 
 *  EntityFrameWorkCore 
 *  Trello ( For tasks manangement )
 
