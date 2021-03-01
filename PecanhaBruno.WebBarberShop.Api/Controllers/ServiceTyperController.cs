@@ -69,9 +69,9 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("GetById")]
-        public IActionResult GetById(int id, int companyId) {
+        public IActionResult GetById(int id) {
             try {
-                var ret = _service.GetServiceById(id, companyId);
+                var ret = _service.GetServiceById(id);
                 return Ok(ret);
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {

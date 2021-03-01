@@ -10,8 +10,8 @@ using Pecanha.WebBaberShopp.Infra.Context;
 namespace PecanhaBruno.WebBarberShop.Infra.Migrations
 {
     [DbContext(typeof(WebBarberShoppContext))]
-    [Migration("20200704011649_initial")]
-    partial class initial
+    [Migration("20210301213029_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,7 +118,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
                     b.ToTable("Queue");
                 });
 
-            modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", b =>
+            modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -341,6 +341,9 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnName("LastUpdate")
                         .HasColumnType("datetime2");
@@ -448,7 +451,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", b =>
+            modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", b =>
                 {
                     b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.CurrentQueue", "CurrentQueue")
                         .WithMany("Custumers")
@@ -459,7 +462,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
                         .HasForeignKey("ScheduleId");
 
                     b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.User", "User")
-                        .WithMany("Custumer")
+                        .WithMany("Customer")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -467,7 +470,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
 
             modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.CustumerXServices", b =>
                 {
-                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", "Custumer")
+                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", "Custumer")
                         .WithMany("CustumerServices")
                         .HasForeignKey("CustumerId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -499,15 +502,15 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
 
             modelBuilder.Entity("PecanhaBruno.WebBarberShop.Domain.Entities.ScheduleDay", b =>
                 {
-                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", "Current")
+                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", "Current")
                         .WithMany()
                         .HasForeignKey("CurrentId");
 
-                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", "Last")
+                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", "Last")
                         .WithMany()
                         .HasForeignKey("LastId");
 
-                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Custumer", "Next")
+                    b.HasOne("PecanhaBruno.WebBarberShop.Domain.Entities.Customer", "Next")
                         .WithMany()
                         .HasForeignKey("NextId");
                 });

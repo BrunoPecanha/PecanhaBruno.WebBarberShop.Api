@@ -12,19 +12,19 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
     public class ServiceTypeService : ServiceBase<ServiceType>, IServiceTypeService
     {
 
-        private IWebBarberShoppContext _Context { get; }
-        private IServiceTypeRepository _ServiceRepository { get; }
+        private IWebBarberShoppContext _context { get; }
+        private IServiceTypeRepository _serviceRepository { get; }
 
         public ServiceTypeService(IServiceTypeRepository repository, IWebBarberShoppContext context)
             : base(repository) {
-            _ServiceRepository = repository;
-            _Context = context;
+            _serviceRepository = repository;
+            _context = context;
         }
 
         public ICollection<ServiceType> GetAllServicesType(int companyId, int page, int qtd) {
             int skip = (page - 1) * qtd;
 
-            return _Context.ServiceType
+            return _context.ServiceType
                               .Where(x => x.CompanyId == companyId && x.Activated)
                               .AsNoTracking()
                               .Where(x => x.Activated)
@@ -39,37 +39,40 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
             }
 
             serviceType.Validate();
-            _ServiceRepository.Update(serviceType);
+            _serviceRepository.Update(serviceType);
         }
 
         public void TryHardDelete(int id) {
 
-            bool wasServiceUsed = _Context.CustumerSelectedServices
+            bool wasServiceUsed = _context.CustumerSelectedServices
                                                 .Include(x => x.Service)
                                                 .Any(x => x.ServiceId == id);
 
-            var service = _ServiceRepository.GetById(id);
+            var service = _serviceRepository.GetById(id);
             if (wasServiceUsed) {
                 service.UpdataServiceStatus(false);
-                _ServiceRepository.Update(service);
+                _serviceRepository.Update(service);
             } else {
-                _ServiceRepository.Remove(service);
+                _serviceRepository.Remove(service);
             }
         }
 
-        public ServiceType GetServiceById(int companyId, int id) {
-            return _Context.ServiceType
+        public ServiceType GetServiceById(int id) {
+            ServiceType service = _context.ServiceType
                            .AsNoTracking()
-                           .FirstOrDefault(x => x.CompanyId == companyId && x.Id == id && x.Activated);
+                           .FirstOrDefault(x => x.Id == id && x.Activated);
+            if (service is null)
+                throw new Exception(Resources.mNoServiceWasFound);
+            return service;
         }
 
         public void CreateNewService(ServiceType serviceDto) {
-            _ServiceRepository.Add(serviceDto);
+            _serviceRepository.Add(serviceDto);
         }
 
         public ICollection<ServiceType> GetServicesByCustomer(int customerId)
         {
-            return _Context.CustumerSelectedServices
+            return _context.CustumerSelectedServices
                            .Include(x => x.Custumer)
                            .AsNoTracking()
                            .Where(x => x.Custumer.Id == customerId)
