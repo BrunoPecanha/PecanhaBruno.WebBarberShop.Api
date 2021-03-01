@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PecanhaBruno.WebBarberShop.Domain.Entities;
 using PecanhaBruno.WebBarberShop.Infra.Context;
 using System;
 using System.Linq;
 
 namespace Pecanha.WebBaberShopp.Infra.Context {
-    public class WebBarberShoppContext : DbContext, IWebBarberShoppContext
-    {
+    public class WebBarberShoppContext : DbContext, IWebBarberShoppContext {       
         public WebBarberShoppContext(DbContextOptions<WebBarberShoppContext> options)
                 : base(options) {
         }
@@ -32,10 +32,15 @@ namespace Pecanha.WebBaberShopp.Infra.Context {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+            //optionsBuilder.UseLoggerFactory(_loggerFactory);
+            //optionsBuilder.EnableSensitiveDataLogging();
             if (!optionsBuilder.IsConfigured) {
                 optionsBuilder.UseSqlServer(SqlHelper.ConnectionString);
             }
-        }        
+
+            optionsBuilder.UseSqlServer(SqlHelper.ConnectionString);
+            optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
+        }
 
         /// <summary>
         /// SaveChanges alterado para manter a data de registro do usuário inalterada após a inserção.

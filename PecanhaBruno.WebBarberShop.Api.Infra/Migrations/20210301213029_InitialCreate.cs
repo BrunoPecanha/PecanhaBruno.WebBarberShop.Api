@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PecanhaBruno.WebBarberShop.Infra.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,7 +96,8 @@ namespace PecanhaBruno.WebBarberShop.Infra.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     MediumTime = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    CompanyId = table.Column<int>(nullable: false)
+                    CompanyId = table.Column<int>(nullable: false),
+                    Img = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

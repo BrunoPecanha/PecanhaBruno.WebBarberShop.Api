@@ -29,7 +29,7 @@ namespace PecanhaBruno.WebBarberShop.Api {
             services.AddMvc().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;                
             });
 
 
@@ -50,6 +50,7 @@ namespace PecanhaBruno.WebBarberShop.Api {
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
             app.UseSwagger();
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseSwaggerUI(options =>
             {

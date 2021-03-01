@@ -43,9 +43,7 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
         public IList<Customer> GetCustomerByName(string name) {
             return _dbContext.Custumer
                              .Include(x => x.User)
-                             .Where(x => x.User.Name.Contains(name))
-                             .GroupBy(x => x.User)
-                             .Select(x => x.First())
+                             .Where(x => x.User.Name.Contains(name))                            
                              .ToArray();
         }
     }
