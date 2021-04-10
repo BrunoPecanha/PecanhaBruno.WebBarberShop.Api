@@ -1,7 +1,9 @@
-﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using PecanhaBruno.WebBarberShop.Domain.Entities;
+using PecanhaBruno.WebBarberShop.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
+namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating {
     public class UpdatingUserDto
     {
         /// <summary>
@@ -9,7 +11,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "MobileInfo")]
-        public string MobileInfo { get; set; }
+        public int MobileInfo { get; set; }
 
         /// <summary>
         /// Nome do usuário
@@ -25,7 +27,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
         /// <summary>
         /// Foto do usuário
         /// </summary>      
-        public string Picture { get; set; }
+        public IFormFile Picture { get; set; }
         /// <summary>
         /// Email do usuário
         /// </summary>        
@@ -40,17 +42,13 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
         /// Indica se o usuário é o proprietário.
         /// </summary>       
         public bool Owner { get; set; }
-        /// <summary>
-        /// Id da empresa
-        /// </summary>       
-        public int CompanyId { get; set; }
 
         /// <summary>
         /// Gera uma instância de User a partir do container
         /// </summary>
         /// <returns></returns>
         public User ToEntity() {
-            return new User(Name, LastName, Picture, Email, PassWord, Owner, MobileInfo);
+            return new User(Name, LastName, Email, PassWord, Owner, Picture, (MobileEnum)MobileInfo);
         }
     }
 }

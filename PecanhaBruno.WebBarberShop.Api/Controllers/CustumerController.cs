@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating;
 
 namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     /// <summary>

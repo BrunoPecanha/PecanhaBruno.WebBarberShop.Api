@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
@@ -52,8 +52,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpGet("GetById")]
         public IActionResult GetById(int id) {
             try {
-                var ret = _repository.GetById(id);
-                return Ok(ret);
+                 _repository.GetById(id);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
@@ -67,8 +67,8 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         [HttpPut]
         public IActionResult Put(UpdatingUserDto user) {
             try {
-                var ret = _service.UpdateUser(user.ToEntity());
-                return Ok(ret);
+                _service.UpdateUser(user.ToEntity());
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -78,12 +78,11 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         }
 
 
-
         [HttpDelete]
         public IActionResult Delete(int id) {
             try {
-                var ret = _service.DeleteUser(id);
-                return Ok(ret);
+                 _service.DeleteUser(id);
+                return Ok();
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,
