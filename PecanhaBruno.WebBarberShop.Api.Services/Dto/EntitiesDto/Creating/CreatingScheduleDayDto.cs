@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating
+namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating
 {
     public class CreatingScheduleDayDto {
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating {
+namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating {
     public class UpdatingCustumerDto {
         /// <summary>
         /// Id do cliente

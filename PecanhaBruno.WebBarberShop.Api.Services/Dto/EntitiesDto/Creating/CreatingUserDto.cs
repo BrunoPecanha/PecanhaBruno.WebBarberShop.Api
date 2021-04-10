@@ -1,7 +1,9 @@
-﻿using PecanhaBruno.WebBarberShop.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using PecanhaBruno.WebBarberShop.Domain.Entities;
+using PecanhaBruno.WebBarberShop.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
+namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating {
     public class CreatingUserDto
     {
         /// <summary>
@@ -9,7 +11,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "MobileInfo")]
-        public string MobileInfo { get; set; }
+        public MobileEnum MobileInfo { get; set; }
 
         /// <summary>
         /// Nome do usuário
@@ -24,13 +26,12 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Campo obrigatório")]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
-
-        //TODO - Ver como enviar e gravar imagens no BD
+        
         /// <summary>
         /// Foto do usuário
         /// </summary>    
         [Display(Name = "Picture")]
-        public string Picture { get; set; }
+        public IFormFile Picture { get; set; }
         /// <summary>
         /// Email do usuário
         /// </summary>        
@@ -65,7 +66,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating {
         /// </summary>
         /// <returns></returns>
         public User ToEntity() {
-            return new User(Name, LastName, Picture, Email, PassWord, Owner, MobileInfo);
+            return new User(Name, LastName, Email, PassWord, Owner, MobileInfo);
         }
     }
 }

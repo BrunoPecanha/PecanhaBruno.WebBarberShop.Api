@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating
+namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating
 {
     public class UpdatingQueueDto {       
         /// <summary>

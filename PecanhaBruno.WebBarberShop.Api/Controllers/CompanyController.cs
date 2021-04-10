@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PecanhaBruno.WebBarberShop.Domain.Dto;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Creating;
-using PecanhaBruno.WebBarberShop.Domain.Dto.EntitiesDto.Updating;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Repository;
 using PecanhaBruno.WebBarberShop.Domain.Interface.Service;
 using System;
+using PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Updating;
+using PecanhaBruno.WebBarberShop.Service.Properties;
 
 namespace PecanhaBruno.WebBarberShop.Api.Controllers {
     [AllowAnonymous]
@@ -23,7 +24,13 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         public IActionResult Post([FromBody] CreatingCompanyDto company) {
             try {
                 _service.CreateNewCompany(company.ToEntity());
-                return Ok();
+
+                return Ok(new DefaultOutPutContainer() {                   
+                    Valid = true,
+                    Message = $"{company.FantasyName} {Resources.mSucceedCreated}"
+                });
+
+
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -53,7 +60,7 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
             try {
                 var ret = _repository.GetCompanyById(id);
                 return Ok(new DefaultOutPutContainer() {
-                    Valid = false,
+                    Valid = true,
                     Log = ret
                 });
             } catch (Exception ex) {
@@ -69,7 +76,10 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         public IActionResult Put(UpdatingCompanyDto company) {
             try {
                 _service.UpdateCompany(company.ToEntity());
-                return Ok();
+                return Ok(new DefaultOutPutContainer() {
+                    Valid = true,
+                    Message = Resources.mSuceedUpdated
+                });
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Valid = false,
@@ -82,7 +92,12 @@ namespace PecanhaBruno.WebBarberShop.Api.Controllers {
         public IActionResult Delete(int id) {
             try {
                 _service.RemoveCompany(id);
-                return Ok();
+
+                return Ok(new DefaultOutPutContainer() {
+                    Valid = true,
+                    Message = Resources.mSuceedDeleted
+                });
+
             } catch (Exception ex) {
                 return BadRequest(new DefaultOutPutContainer() {
                     Id = id,

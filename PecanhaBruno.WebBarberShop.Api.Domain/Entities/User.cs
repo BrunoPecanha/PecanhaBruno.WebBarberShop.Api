@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using PecanhaBruno.WebBarberShop.Domain.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Entities {
@@ -7,8 +9,8 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         private User() {
         }
 
-        public User(string name, string lastName, string picture, string email,
-            string passWord, bool owner, string mobileInfo) {
+        public User(string name, string lastName,  string email,
+            string passWord, bool owner, IFormFile picture, MobileEnum mobileInfo) {
             Name = name;
             LastName = lastName;
             Picture = picture;            
@@ -37,7 +39,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Foto do usuário.
         /// </summary>
-        public string Picture { get; private set; }
+        public IFormFile Picture { get; private set; }
 
         /// <summary>
         /// Última visita do usuário ao estabelecimento.
@@ -55,7 +57,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Informações do aparelho
         /// </summary>
-        public string MobileInfo { get; private set; }
+        public MobileEnum MobileInfo { get; private set; }
 
         /// <summary>
         /// Indica se o usuário é propritário
@@ -101,8 +103,8 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// Atualiza a foto do usuário.
         /// </summary>
         /// <param name="picture">Array de bytes da foto do usuário.</param>
-        public void UpdatePicture(string picture) {
-            if (!string.IsNullOrEmpty(picture)) {
+        public void UpdatePicture(IFormFile picture) {
+            if (!(picture is null)) {
                 this.Picture = picture;
             }
         }
