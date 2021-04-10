@@ -66,7 +66,7 @@ namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating {
         /// </summary>
         /// <returns></returns>
         public User ToEntity() {
-            return new User(Name, LastName, Email, PassWord, Owner, MobileInfo);
+            return new User(Name, LastName, Email, PassWord, Owner, Picture, MobileInfo);
         }
     }
 }
