@@ -70,12 +70,11 @@ namespace PecanhaBruno.WebBarberShop.Infra.Data.Repositories {
         /// </summary>
         /// <param name="companyId">Id da empresa.</param>
         /// <returns></returns>
-        public ICollection<User> GetAllUsersInCurrentQueue(int companyId) {
+        public ICollection<Customer> GetAllCostumersInCurrentQueue(int companyId) {
             return Context.Custumer
                           .Include(x => x.User)
                           .Where(x => x.CurrentQueue.CompanyId == companyId && !x.IsServiceDone)
-                          .OrderBy(x => x.Id)
-                          .Select(x => x.User)
+                          .OrderBy(x => x.Id)                         
                           .Distinct()
                           .AsNoTracking()
                           .ToArray();

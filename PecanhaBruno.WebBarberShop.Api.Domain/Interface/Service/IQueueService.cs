@@ -6,7 +6,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Service {
         CurrentQueue StartQueue(CurrentQueue queue);
         ICollection<CurrentQueue> GetAllCurrentQueues(int page, int qtd);
         void FinishQueue(int companyId, int userId);
-        ICollection<User> GetAllCustumersInCurrentQueue(int companyId);
+        ICollection<Customer> GetAllCustumersInCurrentQueue(int companyId);
         User GetLastInCurrentQueue(int companyId);
         bool IsThereQueueStarted(int companyId);
         CurrentQueue GetCurrentQueue(int companyId);

@@ -27,9 +27,9 @@ namespace PecanhaBruno.WebBaberShop.Infra.Data.EntityConfig {
              .Property(c => c.LastUpdate)
              .HasColumnName("LastUpdate");
 
-            builder
-             .Property(c => c.Picture)
-             .HasColumnName("Picture");
+            //builder
+            // .Property(c => c.Picture)
+            // .HasColumnName("Picture");
 
             builder
              .Property(c => c.LastVisitDate)

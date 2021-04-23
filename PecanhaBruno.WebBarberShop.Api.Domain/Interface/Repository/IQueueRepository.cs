@@ -36,7 +36,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Interface.Repository {
         /// </summary>
         /// <param name="companyId">Ida da empresa.</param>
         /// <returns></returns>
-        ICollection<User> GetAllUsersInCurrentQueue(int companyId);
+        ICollection<Customer> GetAllCostumersInCurrentQueue(int companyId);
 
         /// <summary>
         /// Recupera todas as filas ( Função de administrador do sistema )

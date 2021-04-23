@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace PecanhaBruno.WebBarberShop.Domain.Entities {
+    /// <summary>
+    /// Classe que relaciona os cliente que estão na agenda do dia
+    /// </summary>
     public class ScheduleDayXCustumers : To {       
         /// <summary>
         /// Id do Cliente.

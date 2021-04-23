@@ -50,7 +50,11 @@ namespace PecanhaBruno.WebBarberShop.Api {
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
             app.UseSwagger();
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyOrigin()
+                              .AllowAnyMethod()
+                              .AllowAnyHeader());
+
+            app.UseHttpsRedirection();
 
             app.UseSwaggerUI(options =>
             {

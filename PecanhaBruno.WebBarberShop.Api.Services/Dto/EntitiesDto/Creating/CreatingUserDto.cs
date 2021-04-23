@@ -39,7 +39,6 @@ namespace PecanhaBruno.WebBarberShop.Service.Dto.EntitiesDto.Creating {
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        //  public string Login { get; set; }
         /// <summary>
         /// Senha do usuário
         /// </summary>     

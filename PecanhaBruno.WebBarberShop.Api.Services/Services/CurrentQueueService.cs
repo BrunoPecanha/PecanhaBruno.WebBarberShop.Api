@@ -60,8 +60,8 @@ namespace PecanhaBruno.WebBarberShop.Service.Services {
         /// </summary>
         /// <param name="companyId">Id da empresa</param>
         /// <returns></returns>
-        public ICollection<User> GetAllCustumersInCurrentQueue(int companyId) {
-            return _currentRepositoy.GetAllUsersInCurrentQueue(companyId);
+        public ICollection<Customer> GetAllCustumersInCurrentQueue(int companyId) {
+            return _currentRepositoy.GetAllCustumersInCurrentQueue(companyId);
         }
 
         public User GetLastInCurrentQueue(int companyId) {

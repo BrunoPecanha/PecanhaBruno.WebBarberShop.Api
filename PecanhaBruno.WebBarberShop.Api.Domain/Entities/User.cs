@@ -13,7 +13,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
             string passWord, bool owner, IFormFile picture, MobileEnum mobileInfo) {
             Name = name;
             LastName = lastName;
-            Picture = picture;            
+          //  Picture = picture;            
             Email = email;
             PassWord = passWord;
             Owner = owner;
@@ -39,7 +39,8 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <summary>
         /// Foto do usuário.
         /// </summary>
-        public IFormFile Picture { get; private set; }
+        //[NotMapped]
+        //public IFormFile Picture { get; private set; }
 
         /// <summary>
         /// Última visita do usuário ao estabelecimento.
@@ -105,7 +106,7 @@ namespace PecanhaBruno.WebBarberShop.Domain.Entities {
         /// <param name="picture">Array de bytes da foto do usuário.</param>
         public void UpdatePicture(IFormFile picture) {
             if (!(picture is null)) {
-                this.Picture = picture;
+              //  this.Picture = picture;
             }
         }
 
